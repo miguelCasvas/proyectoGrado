@@ -65,8 +65,8 @@ class RouteServiceProvider extends ServiceProvider
      */
     protected function mapApiRoutes()
     {
-        Route::prefix('api')
-             ->middleware('api')
+        Route::prefix('')
+             //->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
     }
@@ -74,7 +74,7 @@ class RouteServiceProvider extends ServiceProvider
     protected function mapApiCitiphone()
     {
         Route::middleware('oauth')
-            ->name($this->namespace)
+            ->namespace($this->namespace)
             ->group(base_path('routes/apiCitiphone.php'));
     }
 }

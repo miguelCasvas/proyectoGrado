@@ -176,6 +176,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        App\Providers\MigrationServiceProvider::class,
 
         LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
         LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
