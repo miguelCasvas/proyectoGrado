@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Cojunto extends Model
+class Conjunto extends Model
 {
     protected $table = "conjunto";
     protected $primaryKey = "id_conjunto";

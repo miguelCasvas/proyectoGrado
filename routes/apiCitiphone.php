@@ -21,4 +21,7 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     Route::resource('login', 'LoginController');
     Route::post('contrasenia', 'UserController@contrasenia');
 
+    // CONJUNTO
+    Route::resource('conjuntos', 'ConjuntoController');
+
 });
