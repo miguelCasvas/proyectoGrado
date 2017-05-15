@@ -14,14 +14,17 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     //Route::post('usuarios', 'usuarioController@store');
     //Route::get('demo', 'usuarioController@demo');
 
-    // USUARIO
+    # USUARIO
     Route::resource('usuarios', 'usuarioController');
 
-    // LOGIN
+    # LOGIN
     Route::resource('login', 'LoginController');
     Route::post('contrasenia', 'UserController@contrasenia');
 
-    // CONJUNTO
+    # CONJUNTO
     Route::resource('conjuntos', 'ConjuntoController');
+
+    # Catalogo
+    Route::resource('catalogo', 'CatalogoController');
 
 });
