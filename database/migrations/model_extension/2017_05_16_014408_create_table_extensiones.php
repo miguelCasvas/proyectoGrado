@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableEstado extends Migration
+class CreateTableExtensiones extends Migration
 {
     /**
      * Run the migrations.
@@ -12,12 +13,13 @@ class CreateTableEstado extends Migration
      */
     public function up()
     {
-        Schema::create('estados', function (Blueprint $table) {
-            $table->increments('id_estado');
-            $table->string('nombre_estado', 200);
-            $table->timestamps();
+        Schema::create('extensiones', function (Blueprint $table) {
+            $table->increments('id_exten');
+            $table->string('extension', 50);
+
             # FK
-            $table->integer('id_modulo');
+            $table->integer('id_estado')->unsigned();
+
         });
     }
 
@@ -28,6 +30,6 @@ class CreateTableEstado extends Migration
      */
     public function down()
     {
-        Schema::drop('estados');
+        Schema::dropIfExists('extensiones');
     }
 }

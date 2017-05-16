@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
@@ -12,8 +13,8 @@ class CreateIndexModulos extends Migration
      */
     public function up()
     {
-        Schema::table('modulos', function(Blueprint $table){
-            $table->index('id_estado','index_Modulos_Estados');
+        Schema::table('modulos', function (Blueprint $table) {
+            $table->index('id_estado', 'IXFK_Modulos_Estados');
         });
     }
 
@@ -24,8 +25,8 @@ class CreateIndexModulos extends Migration
      */
     public function down()
     {
-        Schema::table('modulos', function(Blueprint $table){
-            $table->dropIndex('index_Modulos_Estados');
+        Schema::table('modulos', function (Blueprint $table) {
+            $table->dropIndex('IXFK_Modulos_Estados');
         });
     }
 }

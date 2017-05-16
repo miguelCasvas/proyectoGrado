@@ -12,10 +12,13 @@ class CreateTableCanalComunicacion extends Migration
      */
     public function up()
     {
-        Schema::create('canal_comunicacion', function (Blueprint $table) {
+        Schema::create('canal_comunicaciones', function (Blueprint $table) {
             $table->increments('id_canal');
             $table->string('indicativo',50)->nullable();
             $table->string('canal', 100)->nullable();
+
+            $table->timestamps();
+
             # FK
             $table->integer('id_usuario')->unsigned();
         });
@@ -28,6 +31,6 @@ class CreateTableCanalComunicacion extends Migration
      */
     public function down()
     {
-        Schema::drop('canal_comunicacion');
+        Schema::drop('canal_comunicaciones');
     }
 }

@@ -12,9 +12,10 @@ class CreateTableTipoSalida extends Migration
      */
     public function up()
     {
-        Schema::create('tipo_salida', function (Blueprint $table) {
+        Schema::create('tipo_salidas', function (Blueprint $table) {
             $table->increments('id_tipo_salida');
             $table->string('nombre_tipo_salida', 50);
+            $table->timestamps();
 
             # FK
             $table->integer('id_marcado')->unsigned();
@@ -29,6 +30,6 @@ class CreateTableTipoSalida extends Migration
      */
     public function down()
     {
-        Schema::drop('tipo_salida');
+        Schema::drop('tipo_salidas');
     }
 }

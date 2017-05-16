@@ -13,13 +13,14 @@ class CreateTablePermisos extends Migration
     public function up()
     {
         Schema::create('permisos', function (Blueprint $table) {
-            $table->increments('id_permisos');
+            $table->increments('id_permiso');
             $table->string('nombre_permiso', 200);
             $table->string('id_roles',200);
+            $table->timestamps();
 
             # FK
             $table->integer('id_estado')->unsigned();
-            $table->integer('id_role')->unsigned();
+            $table->integer('id_rol')->unsigned();
         });
     }
 

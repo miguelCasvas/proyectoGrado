@@ -13,6 +13,7 @@ class ConjuntoController extends Controller
      * @var Usuario
      */
     private $modelConjunto = Conjunto::class;
+
     //private $conjuntoController;
     function __construct()
     {

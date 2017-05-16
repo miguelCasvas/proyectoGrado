@@ -12,7 +12,7 @@ class CreateTableConjunto extends Migration
      */
     public function up()
     {
-        Schema::create('conjunto', function (Blueprint $table) {
+        Schema::create('conjuntos', function (Blueprint $table) {
             $table->increments('id_conjunto');
             $table->string('nombre_conjunto', 200);
             $table->string('direccion', 200);
@@ -20,6 +20,8 @@ class CreateTableConjunto extends Migration
             $table->string('telefono',10);
             $table->string('complemento',10);
             $table->string('imagen',50);
+            $table->timestamps();
+
             # FK
             $table->integer('id_ciudad')->unsigned();
             $table->integer('id_catalogo')->unsigned();
@@ -34,6 +36,6 @@ class CreateTableConjunto extends Migration
      */
     public function down()
     {
-        Schema::drop('conjunto');
+        Schema::drop('conjuntos');
     }
 }

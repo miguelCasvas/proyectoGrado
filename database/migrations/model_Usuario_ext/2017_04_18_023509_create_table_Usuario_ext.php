@@ -14,6 +14,8 @@ class CreateTableUsuarioExt extends Migration
     {
         Schema::create('usuario_ext', function (Blueprint $table) {
             $table->increments('id_extension');
+
+            # Fk
             $table->integer('id_usuario')->unsigned();
         });
     }

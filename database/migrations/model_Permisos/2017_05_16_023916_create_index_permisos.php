@@ -1,9 +1,10 @@
 <?php
 
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIndexCatalogo extends Migration
+class CreateIndexPermisos extends Migration
 {
     /**
      * Run the migrations.
@@ -12,8 +13,8 @@ class CreateIndexCatalogo extends Migration
      */
     public function up()
     {
-        Schema::table('catalogo', function(Blueprint $table){
-            $table->index('id_conjunto', 'index_catalogo_conjunto');
+        Schema::table('permisos', function (Blueprint $table) {
+            $table->index('id_rol','IXFK_Permisos_Roles');
         });
     }
 
@@ -24,8 +25,8 @@ class CreateIndexCatalogo extends Migration
      */
     public function down()
     {
-        Schema::table('catalogo', function(Blueprint $table){
-            $table->dropIndex('index_catalogo_conjunto');
+        Schema::table('permisos', function (Blueprint $table) {
+            $table->dropIndex('IXFK_Permisos_Roles');
         });
     }
 }

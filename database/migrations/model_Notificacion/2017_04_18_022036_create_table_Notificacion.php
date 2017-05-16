@@ -12,9 +12,10 @@ class CreateTableNotificacion extends Migration
      */
     public function up()
     {
-        Schema::create('notificacion', function (Blueprint $table) {
+        Schema::create('notificaciones', function (Blueprint $table) {
             $table->increments('id_notificacion');
             $table->string('mensaje', 4000);
+            $table->timestamps();
 
             # FK
             $table->integer('id_tiposalida')->unsigned();
@@ -30,6 +31,6 @@ class CreateTableNotificacion extends Migration
      */
     public function down()
     {
-        Schema::drop('notificacion');
+        Schema::drop('notificaciones');
     }
 }

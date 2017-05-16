@@ -19,8 +19,9 @@ class CreateTableUsuario extends Migration
             $table->string('email', 200);
             $table->string('identificacion', 50);
             $table->timestamp('fecha_nacimiento');
+            $table->timestamps();
             # FK
-            $table->integer('id_role')->unsigned();
+            $table->integer('id_rol')->unsigned();
             $table->integer('id_conjunto')->unsigned();
             $table->integer('id_canal')->unsigned();
         });
