@@ -7,7 +7,7 @@ use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class Log extends Model
 {
-    protected $table = "log";
+    protected $table = "logs";
     protected $primaryKey = "id_log";
     public $timestamps = false;
 

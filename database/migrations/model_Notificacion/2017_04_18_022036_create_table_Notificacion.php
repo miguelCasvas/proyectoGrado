@@ -18,7 +18,7 @@ class CreateTableNotificacion extends Migration
             $table->timestamps();
 
             # FK
-            $table->integer('id_tiposalida')->unsigned();
+            $table->integer('id_tipo_salida')->unsigned();
             $table->integer('id_usuario')->unsigned();
 
         });
