@@ -24,4 +24,15 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     // CONJUNTO
     Route::resource('conjuntos', 'ConjuntoController');
 
+    // PERMISOS
+    Route::resource('permisos', 'PermisosController');
+
+    // ROL
+    Route::resource('rol', 'RolController');
+
+    // TIPOS SALIDAS
+    Route::resource('tipossalidas', 'TiposSalidasController');
+
+    // ESTADOS
+    Route::resource('estados', 'EstadosController');
 });
