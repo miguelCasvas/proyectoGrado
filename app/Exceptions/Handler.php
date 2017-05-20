@@ -2,13 +2,17 @@
 
 namespace App\Exceptions;
 
+use App\Http\Controllers\Traits\CreateRegisterLog;
 use Exception;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Illuminate\Validation\ValidationException;
+use Illuminate\Http\Response;
+
 
 class Handler extends ExceptionHandler
 {
+    use CreateRegisterLog;
     /**
      * A list of the exception types that should not be reported.
      *
@@ -59,9 +63,9 @@ class Handler extends ExceptionHandler
         // Add debug info if app is in debug mode
         if (config('app.debug')) {
             // Add the exception class name, message and stack trace to response
-            $response['exception'] = get_class($exception); // Reflection might be better here
+            // $response['exception'] = get_class($exception); // Reflection might be better here
             $response['message'] = $exception->getMessage();
-            $response['trace'] = $exception->getTrace();
+            //$response['trace'] = $exception->getTrace();
         }
 
         $status = 400;
@@ -80,6 +84,7 @@ class Handler extends ExceptionHandler
             default:
                 break;
         }
+        //$this->CreateRegisterLog($response);
 
         return response()->json($response, $status);
     }
