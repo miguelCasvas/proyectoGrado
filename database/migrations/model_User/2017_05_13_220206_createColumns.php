@@ -20,7 +20,7 @@ class CreateColumns extends Migration
             $table->integer('is_estado_contrasenia');
             # FK
             $table->integer('id_usuario')->unsigned();
-
+            $table->foreign('id_usuario', 'users_fk_usuarios')->references('id_usuario')->on('usuarios');
             # Renombrar columna name
             //$table->renameColumn('name', 'userName');
 
@@ -35,6 +35,7 @@ class CreateColumns extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_fk_usuarios');
             $table->dropColumn(['contador_contrasenia', 'is_estado_contrasenia', 'id_usuario']);
             //$table->renameColumn('name', 'userName');
         });

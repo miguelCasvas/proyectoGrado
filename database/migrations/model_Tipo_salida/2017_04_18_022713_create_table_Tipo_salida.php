@@ -18,8 +18,8 @@ class CreateTableTipoSalida extends Migration
             $table->timestamps();
 
             # FK
-            $table->integer('id_marcado')->unsigned();
-            $table->integer('id_notificacion')->unsigned();
+            $table->integer('id_canal')->unsigned();
+            $table->integer('id_notificacion')->unsigned()->nullable();
         });
     }
 

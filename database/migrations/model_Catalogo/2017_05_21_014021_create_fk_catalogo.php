@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIndexUbicacionUsuarios extends Migration
+class CreateFkCatalogo extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class CreateIndexUbicacionUsuarios extends Migration
      */
     public function up()
     {
-        Schema::table('usuarios', function (Blueprint $table) {
-            $table->index('id_canal','IXFK_Usuario_Canal_comunicaciones');
+        Schema::table('catalogos', function (Blueprint $table) {
+            $table->foreign('id_conjunto', 'catalogos_fk_conjuntos')->references('id_conjunto')->on('conjuntos');
         });
     }
 
@@ -25,8 +25,8 @@ class CreateIndexUbicacionUsuarios extends Migration
      */
     public function down()
     {
-        Schema::table('usuarios', function (Blueprint $table) {
-            $table->dropIndex('IXFK_Usuario_Canal_comunicaciones');
+        Schema::table('catalogos', function (Blueprint $table) {
+            $table->dropForeign('catalogos_fk_conjuntos');
         });
     }
 }

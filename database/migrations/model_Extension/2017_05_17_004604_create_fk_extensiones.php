@@ -15,6 +15,7 @@ class CreateFkExtensiones extends Migration
     {
         Schema::table('extensiones', function (Blueprint $table) {
             $table->foreign('id_estado','extensiones_fk_estados')->references('id_estado')->on('estados');
+            $table->foreign('id_conjunto','extensiones_fk_conjuntos')->references('id_conjunto')->on('conjuntos');
         });
     }
 
@@ -27,6 +28,7 @@ class CreateFkExtensiones extends Migration
     {
         Schema::table('extensiones', function (Blueprint $table) {
             $table->dropForeign('extensiones_fk_estados');
+            $table->dropForeign('extensiones_fk_conjuntos');
         });
     }
 }

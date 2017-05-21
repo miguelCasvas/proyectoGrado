@@ -14,7 +14,8 @@ class CreateFkUsuarios extends Migration
     public function up()
     {
         Schema::table('usuarios', function (Blueprint $table) {
-            $table->foreign('id_canal', 'usuarios_fk_canal_comunicaciones')->references('id_canal')->on('canal_comunicaciones');
+            $table->foreign('id_rol','usuarios_fk_roles')->references('id_rol')->on('roles');
+            $table->foreign('id_conjunto', 'usuarios_fk_conjuntos')->references('id_conjunto')->on('conjuntos');
         });
     }
 
@@ -26,7 +27,8 @@ class CreateFkUsuarios extends Migration
     public function down()
     {
         Schema::table('usuarios', function (Blueprint $table) {
-            $table->dropForeign('usuarios_fk_canal_comunicaciones');
+            $table->dropForeign('usuarios_fk_roles');
+            $table->dropForeign('usuarios_fk_conjuntos');
         });
     }
 }

@@ -44,6 +44,7 @@ class MigrationServiceProvider extends ServiceProvider
             $routeMigrations.'model_Ciudad/',
             $routeMigrations.'model_Conjunto/',
             $routeMigrations.'model_Estados/',
+            $routeMigrations.'model_Extension/',
             $routeMigrations.'model_Historial/',
             $routeMigrations.'model_Log/',
             $routeMigrations.'model_Login/',

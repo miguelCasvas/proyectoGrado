@@ -17,10 +17,6 @@ class CreateTableNotificacion extends Migration
             $table->string('mensaje', 4000);
             $table->timestamps();
 
-            # FK
-            $table->integer('id_tipo_salida')->unsigned();
-            $table->integer('id_usuario')->unsigned();
-
         });
     }
 

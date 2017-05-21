@@ -15,8 +15,6 @@ class CreateFkConjuntos extends Migration
     {
         Schema::table('conjuntos', function (Blueprint $table) {
             $table->foreign('id_ciudad', 'conjuntos_fk_ciudades')->references('id_ciudad')->on('ciudades');
-            $table->foreign('id_catalogo', 'conjuntos_fk_catalogos')->references('id_catalogo')->on('catalogos');
-            $table->foreign('id_usuario', 'conjuntos_fk_usuarios')->references('id_usuario')->on('usuarios');
         });
     }
 
@@ -29,8 +27,6 @@ class CreateFkConjuntos extends Migration
     {
         Schema::table('conjuntos', function (Blueprint $table) {
             $table->dropForeign('conjuntos_fk_ciudades');
-            $table->dropForeign('conjuntos_fk_catalogos');
-            $table->dropForeign('conjuntos_fk_usuarios');
         });
     }
 }

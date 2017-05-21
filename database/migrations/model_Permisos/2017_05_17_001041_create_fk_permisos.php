@@ -15,7 +15,6 @@ class CreateFkPermisos extends Migration
     {
         Schema::table('permisos', function (Blueprint $table) {
             $table->foreign('id_estado','permisos_fk_estados')->references('id_estado')->on('estados');
-            $table->foreign('id_rol','permisos_fk_roles')->references('id_rol')->on('roles');
         });
     }
 
@@ -28,7 +27,6 @@ class CreateFkPermisos extends Migration
     {
         Schema::table('permisos', function (Blueprint $table) {
             $table->dropForeign('permisos_fk_estados');
-            $table->dropForeign('permisos_fk_roles');
         });
     }
 }

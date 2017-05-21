@@ -20,7 +20,6 @@ class CreateTablePermisos extends Migration
 
             # FK
             $table->integer('id_estado')->unsigned();
-            $table->integer('id_rol')->unsigned();
         });
     }
 

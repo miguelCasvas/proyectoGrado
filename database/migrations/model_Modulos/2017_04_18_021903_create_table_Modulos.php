@@ -17,8 +17,6 @@ class CreateTableModulos extends Migration
             $table->string('nombre_modulo',200);
             $table->timestamps();
 
-            # FK
-            $table->integer('id_estado')->unsigned();
         });
     }
 

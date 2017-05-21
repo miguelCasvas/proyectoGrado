@@ -18,14 +18,12 @@ class CreateTableConjunto extends Migration
             $table->string('direccion', 200);
             $table->string('email',200);
             $table->string('telefono',10);
-            $table->string('complemento',10);
-            $table->string('imagen',50);
+            $table->string('complemento',10)->nullable();
+            $table->string('imagen',50)->nullable();
             $table->timestamps();
 
             # FK
             $table->integer('id_ciudad')->unsigned();
-            $table->integer('id_catalogo')->unsigned();
-            $table->integer('id_usuario')->unsigned();
         });
     }
 

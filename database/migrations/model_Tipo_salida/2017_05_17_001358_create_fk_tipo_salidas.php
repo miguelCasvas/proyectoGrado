@@ -14,7 +14,7 @@ class CreateFkTipoSalidas extends Migration
     public function up()
     {
         Schema::table('tipo_salidas', function (Blueprint $table) {
-            $table->foreign('id_marcado', 'tipo_salidas_fk_marcados')->references('id_marcado')->on('marcados');
+            $table->foreign('id_canal', 'tipo_salidas_fk_canal_comunicaciones')->references('id_canal')->on('canal_comunicaciones');
             $table->foreign('id_notificacion', 'tipo_salidas_fk_notificaciones')->references('id_notificacion')->on('notificaciones');
         });
     }
@@ -27,7 +27,7 @@ class CreateFkTipoSalidas extends Migration
     public function down()
     {
         Schema::table('tipo_salidas', function (Blueprint $table) {
-            $table->dropForeign('tipo_salidas_fk_marcados');
+            $table->dropForeign('tipo_salidas_fk_canal_comunicaciones');
             $table->dropForeign('tipo_salidas_fk_notificaciones');
         });
     }

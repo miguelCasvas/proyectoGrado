@@ -14,13 +14,11 @@ class CreateTableCanalComunicacion extends Migration
     {
         Schema::create('canal_comunicaciones', function (Blueprint $table) {
             $table->increments('id_canal');
-            $table->string('indicativo',50)->nullable();
-            $table->string('canal', 100)->nullable();
+            $table->string('indicativo',50);
+            $table->string('canal', 100);
 
             $table->timestamps();
-
-            # FK
-            $table->integer('id_usuario')->unsigned();
+            $table->integer('id_conjunto')->unsigned();
         });
     }
 

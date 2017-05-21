@@ -14,7 +14,7 @@ class CreateTableCatalogo extends Migration
     {
         Schema::create('catalogos', function (Blueprint $table) {
             $table->increments('id_catalogo');
-            $table->string('nombre_catalogo', 200)->nullable();
+            $table->string('nombre_catalogo', 200);
 
             $table->timestamps();
 

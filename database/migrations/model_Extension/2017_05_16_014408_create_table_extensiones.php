@@ -14,12 +14,12 @@ class CreateTableExtensiones extends Migration
     public function up()
     {
         Schema::create('extensiones', function (Blueprint $table) {
-            $table->increments('id_exten');
+            $table->increments('id_extension');
             $table->string('extension', 50);
 
             # FK
+            $table->integer('id_conjunto')->unsigned();
             $table->integer('id_estado')->unsigned();
-
         });
     }
 

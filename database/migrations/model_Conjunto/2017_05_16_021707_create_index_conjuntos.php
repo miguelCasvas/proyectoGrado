@@ -14,9 +14,7 @@ class CreateIndexConjuntos extends Migration
     public function up()
     {
         Schema::table('conjuntos', function (Blueprint $table) {
-            $table->index('id_catalogo', 'IXFK_Conjunto_Catalogo');
             $table->index('id_ciudad', 'IXFK_Conjunto_Ciudad');
-            $table->index('id_usuario','IXFK_Conjunto_Usuario');
         });
     }
 
@@ -28,9 +26,7 @@ class CreateIndexConjuntos extends Migration
     public function down()
     {
         Schema::table('conjuntos', function (Blueprint $table) {
-            $table->dropIndex('IXFK_Conjunto_Catalogo');
             $table->dropIndex('IXFK_Conjunto_Ciudad');
-            $table->dropIndex('IXFK_Conjunto_Usuario');
         });
     }
 }

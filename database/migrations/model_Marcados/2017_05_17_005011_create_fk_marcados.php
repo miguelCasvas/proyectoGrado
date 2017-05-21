@@ -14,8 +14,8 @@ class CreateFkMarcados extends Migration
     public function up()
     {
         Schema::table('marcados', function (Blueprint $table) {
-            $table->foreign('id_canal','marcados_fk_canal')->references('id_canal')->on('canal_comunicaciones');
             $table->foreign('id_tipo_salida','marcados_fk_tipo_salidas')->references('id_tipo_salida')->on('tipo_salidas');
+            $table->foreign('id_extension','marcados_fk_extensiones')->references('id_extension')->on('extensiones');
         });
     }
 
@@ -27,8 +27,8 @@ class CreateFkMarcados extends Migration
     public function down()
     {
         Schema::table('marcados', function (Blueprint $table) {
-            $table->dropForeign('marcados_fk_canal');
             $table->dropForeign('marcados_fk_tipo_salidas');
+            $table->dropForeign('marcados_fk_extensiones');
         });
     }
 }

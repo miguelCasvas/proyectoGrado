@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateIndexPermisos extends Migration
+class CreateTablePermisosPorRol extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,10 @@ class CreateIndexPermisos extends Migration
      */
     public function up()
     {
-        Schema::table('permisos', function (Blueprint $table) {
-            $table->index('id_rol','IXFK_Permisos_Roles');
+        Schema::create('permisos_por_rol', function (Blueprint $table) {
+            $table->increments('id_permisos_por_rol');
+            $table->index('id_rol')->unsigned();
+            $table->index('id_permiso')->unsigned();
         });
     }
 
@@ -25,8 +27,6 @@ class CreateIndexPermisos extends Migration
      */
     public function down()
     {
-        Schema::table('permisos', function (Blueprint $table) {
-            $table->dropIndex('IXFK_Permisos_Roles');
-        });
+        Schema::drop('permisos_por_rol');
     }
 }

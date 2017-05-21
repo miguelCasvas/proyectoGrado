@@ -14,7 +14,6 @@ class CreateIndexTipoSalidas extends Migration
     public function up()
     {
         Schema::table('tipo_salidas', function (Blueprint $table) {
-            $table->index('id_marcado','IXFK_Tipo_salida_marcados');
             $table->index('id_notificacion','IXFK_Tipo_salida_Notificaciones');
         });
     }
@@ -27,7 +26,6 @@ class CreateIndexTipoSalidas extends Migration
     public function down()
     {
         Schema::table('tipo_salidas', function (Blueprint $table) {
-            $table->dropIndex('IXFK_Tipo_salida_marcados');
             $table->dropIndex('IXFK_Tipo_salida_Notificaciones');
         });
     }

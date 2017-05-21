@@ -18,7 +18,7 @@ class CreateTableMarcados extends Migration
             $table->timestamps();
 
             # FK
-            $table->integer('id_canal')->unsigned();
+            $table->integer('id_extension')->unsigned();
             $table->integer('id_tipo_salida')->unsigned();
         });
     }
