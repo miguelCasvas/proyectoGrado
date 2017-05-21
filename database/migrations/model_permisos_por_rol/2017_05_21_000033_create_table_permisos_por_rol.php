@@ -15,8 +15,8 @@ class CreateTablePermisosPorRol extends Migration
     {
         Schema::create('permisos_por_rol', function (Blueprint $table) {
             $table->increments('id_permisos_por_rol');
-            $table->index('id_rol')->unsigned();
-            $table->index('id_permiso')->unsigned();
+            $table->integer('id_rol')->unsigned();
+            $table->integer('id_permiso')->unsigned();
         });
     }
 
