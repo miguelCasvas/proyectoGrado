@@ -150,6 +150,16 @@ class CargueDemo extends Seeder
             'id_conjunto' => 1
         ]);
 
+        # CARGUE USER
+        \DB::table('users')->insert([
+            'name' => 'super admin',
+            'email' => 'superAdmin@demo.com',
+            'password' => bcrypt(12345678),
+            'contador_contrasenia' => 0,
+            'is_estado_contrasenia' => 1,
+            'id_usuario' => 1
+        ]);
+
         # CARGUE CLIENTE
         \DB::table('oauth_clients')->insert([
             'id' => 'f3d259ddd3ed8ff3843839b',
