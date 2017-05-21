@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class UsuarioExt extends Model
 {
     //
+    protected $table = 'usuario_ext';
+
+    protected $primaryKey = 'id_extension';
+
+    protected $fillable = ['id_usuario'];
 }

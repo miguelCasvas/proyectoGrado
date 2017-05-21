@@ -6,7 +6,7 @@ use App\Http\Controllers\Traits\CreateRegisterLog;
 use App\Models\Estados;
 use Illuminate\Http\Request;
 
-class EstadosController extends Controller
+class EstadoController extends Controller
 {
     //
     use CreateRegisterLog;

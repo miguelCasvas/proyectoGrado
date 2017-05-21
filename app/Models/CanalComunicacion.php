@@ -10,7 +10,7 @@ class CanalComunicacion extends Model
 
     protected $primaryKey = 'id_canal';
 
-    protected $fillable = ['indicativo', 'canal', 'id_usuario'];
+    protected $fillable = ['indicativo', 'canal', 'id_conjunto'];
 
 
 }

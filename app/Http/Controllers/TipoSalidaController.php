@@ -6,7 +6,7 @@ use App\Http\Controllers\Traits\CreateRegisterLog;
 use App\Models\TiposSalidas;
 use Illuminate\Http\Request;
 
-class TiposSalidasController extends Controller
+class TipoSalidaController extends Controller
 {
     //
     use CreateRegisterLog;

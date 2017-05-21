@@ -11,6 +11,6 @@ class Log extends Model
     protected $primaryKey = "id_log";
     public $timestamps = false;
 
-    protected $fillable = ["ip", "end_point", "accion", "request", "log", "id_usuario", "id_client"];
+    protected $fillable = ["end_point", "accion", "request", "log", "id_usuario", "id_client"];
 
 }

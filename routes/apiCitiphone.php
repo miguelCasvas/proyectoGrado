@@ -34,9 +34,9 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     Route::resource('rol', 'RolController');
 
     // TIPOS SALIDAS
-    Route::resource('tipossalidas', 'TiposSalidasController');
+    Route::resource('tipossalidas', 'TipoSalidaController');
 
     // ESTADOS
-    Route::resource('estados', 'EstadosController');
+    Route::resource('estados', 'EstadoController');
 
 });
