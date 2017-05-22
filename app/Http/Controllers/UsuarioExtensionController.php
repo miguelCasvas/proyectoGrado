@@ -20,9 +20,14 @@ class UsuarioExtensionController extends Controller
         $this->userController = new UserController();
     }
 
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function index()
     {
-        
+        $data = $this->modelUsuarioExtensiones->all();
+        return response()->json([ "data"=> $data ]);
     }
 
     /**

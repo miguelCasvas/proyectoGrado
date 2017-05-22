@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
+use App\Http\Requests\Rol\StoreRequest;
 use App\Models\Rol;
 use Illuminate\Http\Request;
 
@@ -19,25 +20,25 @@ class RolController extends Controller
         $this->userController = new UserController();
     }
 
+
     /**
-     * Store a newly created resource in storage.
+     * @param StoreRequest $request
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
 
-        $this->modelRol->nombre_role    = $request->get('nombreRole');
+        $this->modelRol->nombre_rol    = $request->get('nombreRole');
         $this->modelRol->save();
 
-        $response = response()->json($this->modelRol);
+        $response = response()->json(['data' => $this->modelRol]);
+
         # Creacion en modelo log
         $this->CreateRegisterLog($response);
 
         return $response;
     }
-
 
     /**
      * Display the specified resource.
@@ -48,9 +49,7 @@ class RolController extends Controller
     public function show($id)
     {
         $data = $this->modelRol->find($id);
-        $numError = 200;
-
-        $response = response()->json([ 'status'=>  $numError, 'message'=> trans('errors.'.$numError ), "data"=> $data ], $numError);
+        $response = response()->json([ 'data' => $data ]);
         # Creacion en modelo log
         $this->CreateRegisterLog($response);
         return $response;
@@ -65,9 +64,8 @@ class RolController extends Controller
     public function index()
     {
         $data = $this->modelRol->all();
-        $numError = 200;
 
-        return response()->json([ 'status'=>  $numError, 'message'=> trans('errors.'.$numError ), "data"=> $data ], $numError);
+        return response()->json(['data' => $data ]);
     }
 
     /**
@@ -77,21 +75,19 @@ class RolController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
         $response = null;
         $this->modelRol = $this->modelRol->find($id);
 
         if ($this->modelRol == null){
-            $numError = 400;
-            $response = response()->json([ 'status'=>  $numError, 'message'=> trans('errors.'.$numError ) ], $numError);
+            abort(400, trans('errors.901'));
         }
-        else{
-            $this->modelRol->nombre_role    = $request->get('nombreRole');
-            $this->modelRol->save();
 
-            $response = response()->json($this->modelRol);
-        }
+        $this->modelRol->nombre_rol    = $request->get('nombreRole');
+        $this->modelRol->save();
+
+        $response = response()->json(['data' => $this->modelRol]);
 
         $this->CreateRegisterLog($response);
 
@@ -109,13 +105,12 @@ class RolController extends Controller
         $this->modelRol = $this->modelRol->find($id);
 
         if ($this->modelRol == null){
-            $numError = 400;
-            $response = response()->json([ 'status'=>  $numError, 'success'=>'error', 'message'=> trans('errors.'.$numError ) ], $numError);
-        }else {
-            $this->modelRol->find($id)->delete();
-            $numError = 200;
-            $response = response()->json([ 'status'=>  $numError, 'success'=>'success',  'data'=> ['id'=> $id ]], $numError);
+            abort(400, trans('errors.901'));
         }
+
+        $this->modelRol->find($id)->delete();
+        $response = response()->json(['data'=> ['id'=> $id ]]);
+
         $this->CreateRegisterLog($response);
         return $response;
     }

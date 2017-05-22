@@ -20,6 +20,12 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     # EXTENSION DE USUARIO
     Route::resource('usuarioextension', 'UsuarioExtensionController');
 
+    # UBICACION DE CATALOGO
+    Route::resource('ubicacioncatalogo', 'UbicacionCatalogoController');
+
+    # TIPO SALIDA
+    Route::resource('tiposalida','TipoSalidaController');
+
     # LOGIN
     //Route::resource('login', 'LoginController');
     //Route::post('contrasenia', 'UserController@contrasenia');
@@ -31,10 +37,10 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     //Route::resource('catalogo', 'CatalogoController');
 
     # PERMISOS
-    //Route::resource('permisos', 'PermisosController');
+    Route::resource('permisos', 'PermisoController');
 
     # ROL
-    Route::resource('rol', 'RolController');
+    Route::resource('roles', 'RolController');
 
     # TIPOS SALIDAS
     //Route::resource('tipossalidas', 'TipoSalidaController');

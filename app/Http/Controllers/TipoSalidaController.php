@@ -3,19 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
-use App\Models\TiposSalidas;
+use App\Http\Requests\TipoSalida\StoreRequest;
+use App\Models\TipoSalida;
 use Illuminate\Http\Request;
 
 class TipoSalidaController extends Controller
 {
     //
     use CreateRegisterLog;
-    private $modelTiposSalidas = TiposSalidas::class;
+    private $modelTiposSalidas = TipoSalida::class;
     private $userController;
 
     function __construct(){
 
-        $this->modelTiposSalidas = new TiposSalidas();
+        $this->modelTiposSalidas = new TipoSalida();
         $this->userController = new UserController();
     }
 
@@ -25,7 +26,7 @@ class TipoSalidaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
 
         $this->modelTiposSalidas->nombre_tipo_salida    = $request->get('nombreTipoSalida');
@@ -34,12 +35,12 @@ class TipoSalidaController extends Controller
         $this->modelTiposSalidas->save();
 
         $response = response()->json($this->modelTiposSalidas);
+
         # Creacion en modelo log
         $this->CreateRegisterLog($response);
 
         return $response;
     }
-
 
     /**
      * Display the specified resource.
@@ -52,9 +53,11 @@ class TipoSalidaController extends Controller
         $data = $this->modelTiposSalidas->find($id);
         $numError = 200;
 
-        $response = response()->json([ 'status'=>  $numError, 'message'=> trans('errors.'.$numError ), "data"=> $data ], $numError);
+        $response = response()->json(['data' => $data]);
+
         # Creacion en modelo log
         $this->CreateRegisterLog($response);
+
         return $response;
     }
 
@@ -67,9 +70,8 @@ class TipoSalidaController extends Controller
     public function index()
     {
         $data = $this->modelTiposSalidas->all();
-        $numError = 200;
 
-        return response()->json([ 'status'=>  $numError, 'message'=> trans('errors.'.$numError ), "data"=> $data ], $numError);
+        return response()->json([ 'data'=> $data ]);
     }
 
     /**
@@ -79,23 +81,21 @@ class TipoSalidaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
         $response = null;
         $this->modelTiposSalidas = $this->modelTiposSalidas->find($id);
 
-        if ($this->modelTiposSalidas == null){
-            $numError = 400;
-            $response = response()->json([ 'status'=>  $numError, 'message'=> trans('errors.'.$numError ) ], $numError);
+        if ($this->modelEstados == null){
+            abort(400, trans('errors.901'));
         }
-        else{
-            $this->modelTiposSalidas->nombre_tipo_salida    = $request->get('nombreTipoSalida');
-            $this->modelTiposSalidas->id_marcado    = $request->get('idMarcado');
-            $this->modelTiposSalidas->id_notificacion    = $request->get('idNotificacion');
-            $this->modelTiposSalidas->save();
 
-            $response = response()->json($this->modelTiposSalidas);
-        }
+        $this->modelTiposSalidas->nombre_tipo_salida    = $request->get('nombreTipoSalida');
+        $this->modelTiposSalidas->id_marcado    = $request->get('idMarcado');
+        $this->modelTiposSalidas->id_notificacion    = $request->get('idNotificacion');
+        $this->modelTiposSalidas->save();
+
+        $response = response()->json(['data' => $this->modelTiposSalidas]);
 
         $this->CreateRegisterLog($response);
 
@@ -113,13 +113,13 @@ class TipoSalidaController extends Controller
         $this->modelTiposSalidas = $this->modelTiposSalidas->find($id);
 
         if ($this->modelTiposSalidas == null){
-            $numError = 400;
-            $response = response()->json([ 'status'=>  $numError, 'success'=>'error', 'message'=> trans('errors.'.$numError ) ], $numError);
-        }else {
-            $this->modelTiposSalidas->find($id)->delete();
-            $numError = 200;
-            $response = response()->json([ 'status'=>  $numError, 'success'=>'success',  'data'=> ['id'=> $id ]], $numError);
+            abort(400, trans('errors.901'));
         }
+
+        $this->modelTiposSalidas->delete();
+
+        $response = response()->json([ 'data'=> ['id'=> $id ]]);
+
         $this->CreateRegisterLog($response);
         return $response;
     }
