@@ -13,8 +13,9 @@ class CreateFkUsuarioExt extends Migration
      */
     public function up()
     {
-        Schema::table('usuario_ext', function (Blueprint $table) {
-            $table->foreign('id_usuario','usuario_ext_fk_usuarios')->references('id_usuario')->on('usuarios');
+        Schema::table('usuario_extensiones', function (Blueprint $table) {
+            $table->foreign('id_extension','usuario_extensiones_fk_extensiones')->references('id_extension')->on('extensiones');
+            $table->foreign('id_usuario','usuario_extensiones_fk_usuarios')->references('id_usuario')->on('usuarios');
         });
     }
 
@@ -25,8 +26,9 @@ class CreateFkUsuarioExt extends Migration
      */
     public function down()
     {
-        Schema::table('usuario_ext', function (Blueprint $table) {
-            $table->dropForeign('usuario_ext_fk_usuarios');
+        Schema::table('usuario_extensiones', function (Blueprint $table) {
+            $table->dropForeign('usuario_extensiones_fk_extensiones');
+            $table->dropForeign('usuario_extensiones_fk_usuarios');
         });
     }
 }
