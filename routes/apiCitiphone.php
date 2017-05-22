@@ -27,13 +27,13 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     # CATALOGO
     Route::resource('catalogo', 'CatalogoController');
 
-    // PERMISOS
+    # PERMISOS
     Route::resource('permisos', 'PermisosController');
 
-    // ROL
+    # ROL
     Route::resource('rol', 'RolController');
 
-    // TIPOS SALIDAS
+    # TIPOS SALIDAS
     Route::resource('tipossalidas', 'TipoSalidaController');
 
     // ESTADOS
@@ -53,5 +53,6 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
 
     // LOG
     Route::resource('log', 'LogController');
+
 
 });
