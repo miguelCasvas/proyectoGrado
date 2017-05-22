@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
+use App\Http\Requests\Usuario\StoreRequest;
+use App\Http\Requests\Usuario\UpdateRequest;
 use App\Models\Usuario;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -17,12 +19,11 @@ class usuarioController extends Controller
      * @var Usuario
      */
     private $modelUsuario = Usuario::class;
-    private $userController;
 
-    public function demo()
-    {
-        return json_encode(['hola' => 'muno']);
-    }
+    /**
+     * @var UserController
+     */
+    private $userController;
 
     function __construct(){
 
@@ -36,27 +37,16 @@ class usuarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
 
-        if (
-            $this->userController->validarContrasenia(
-                $request->get('contrasenia'),
-                    $request->get('confirmarContrasenia'))
-            )
-        {
-            $numError = 400;
-            return response()->json([ 'status'=>  $numError, 'message'=> trans('errors.'.$numError ) ], $numError);
-        }
-
-        $this->modelUsuario->nombre_usuario     = $request->get('nombreUsuario');
+        $this->modelUsuario->nombres            = $request->get('nombres');
         $this->modelUsuario->apellidos          = $request->get('apellidos');
-        $this->modelUsuario->email              = $request->get('correo');
         $this->modelUsuario->identificacion     = $request->get('identificacion');
         $this->modelUsuario->fecha_nacimiento   = $request->get('fechaNacimiento');
-        $this->modelUsuario->id_role            = 1;
-        $this->modelUsuario->id_conjunto        = 1;
-        $this->modelUsuario->id_canal           = 1;
+        $this->modelUsuario->email              = $request->get('correo');
+        $this->modelUsuario->id_rol             = $request->get('idRol');
+        $this->modelUsuario->id_conjunto        = $request->get('idConjunto');
         $this->modelUsuario->save();
 
         # Creacion en modelo de user
@@ -70,14 +60,15 @@ class usuarioController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Busqueda de usuario por id
      *
-     * @param  int  $id
+     * @param $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-        return json_encode($this->modelUsuario->find($id));
+        $data = ['data' => $this->modelUsuario->find($id)];
+        return response()->json($data);
     }
 
     /**
@@ -87,22 +78,20 @@ class usuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
         $response = null;
         $this->modelUsuario = $this->modelUsuario->find($id);
 
         if ($this->modelUsuario == null){
-            $numError = 400;
-
-            $response = response()->json([ 'status'=>  $numError, 'message'=> trans('errors.'.$numError ) ], $numError);
+            abort(400, trans('errors.901'));
         }
         else{
-            $this->modelUsuario->nombre_usuario = $request->get('nombreUsuario');
-            $this->modelUsuario->apellidos = $request->get('apellidos');
-            $this->modelUsuario->email = $request->get('correo');
-            $this->modelUsuario->identificacion = $request->get('identificacion');
-            $this->modelUsuario->fecha_nacimiento = $request->get('fechaNacimiento');
+            $this->modelUsuario->nombres            = $request->get('nombres');
+            $this->modelUsuario->apellidos          = $request->get('apellidos');
+            $this->modelUsuario->email              = $request->get('correo');
+            $this->modelUsuario->identificacion     = $request->get('identificacion');
+            $this->modelUsuario->fecha_nacimiento   = $request->get('fechaNacimiento');
             $this->modelUsuario->save();
 
             $response = response()->json($this->modelUsuario);
@@ -121,13 +110,19 @@ class usuarioController extends Controller
      */
     public function destroy($id)
     {
-        $this->modelUsuario->find($id)->delete();
+        $this->modelUsuario = $this->modelUsuario->find($id);
 
-        $response = json_encode(['eliminado ' . $id]);
+        if ($this->modelUsuario == null){
+            abort(400, trans('errors.901'));
+        }
+
+        $this->userController->eliminacionPorIdUsuario($id);
+        $this->modelUsuario->delete();
+
+        $response = response()->json([  'data'=> ['id'=> $id ]]);
 
         $this->CreateRegisterLog($response);
         return $response;
-
     }
 
 }
