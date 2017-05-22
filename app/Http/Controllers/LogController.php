@@ -15,6 +15,17 @@ class logController extends Controller
         $this->modelLog = new Log();
 
     }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $data = $this->modelLog->all();
+        return response()->json([ "data"=> $data ]);
+    }
 
     /**
      * Insercion de datos en el log del sistem

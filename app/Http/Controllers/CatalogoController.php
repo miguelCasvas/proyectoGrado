@@ -14,13 +14,12 @@ class CatalogoController extends Controller
      * @var Catalogo|string
      */
     private $modelCatalogo = Catalogo::class;
-
-    private $conjuntoController = null;
+    private $userController;
 
     function __construct()
     {
         $this->modelCatalogo = new Catalogo();
-        //$this->conjuntoController = new ConjutoController();
+        $this->userController = new UserController();
     }
 
     /**
@@ -49,9 +48,24 @@ class CatalogoController extends Controller
      * @param  \App\Models\Catalogo  $catalogo
      * @return \Illuminate\Http\Response
      */
-    public function show(Catalogo $catalogo)
+    public function show($id)
     {
-
+        $data = $this->modelCatalogo->find($id);
+        $response = response()->json([ 'data'=> $data ]);
+        # Creacion en modelo log
+        //$this->CreateRegisterLog($response);
+        return $response;
+    }
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $data = $this->modelCatalogo->all();
+        return response()->json([ "data"=> $data ]);
     }
 
     /**
@@ -63,33 +77,42 @@ class CatalogoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $this->busquedaConjunto();
+        $response = null;
         $this->modelCatalogo = $this->modelCatalogo->find($id);
 
         if ($this->modelCatalogo == null){
-            $numError = 400;
-            $response = response()->json([ 'status'=>  $numError, 'message'=> trans('errors.'.$numError ) ], $numError);
+            abort(400, trans('errors.901'));
+        }
+        else{
+            $this->modelCatalogo->nombre_estado    = $request->get('nombreEstado');
+            $this->modelCatalogo->id_modulo    = $request->get('idModulo');
+            $this->modelCatalogo->save();
+            $response = response()->json(['data'=>$this->modelCatalogo]);
         }
 
-        $this->modelCatalogo->nombre_Catalogo = $request->get('nombreCatalogo');
-        $this->modelCatalogo->id_conjunto   = $request->get('idConjunto');
-        $this->modelCatalogo->ave();
-
-        $response = response()->json($this->modelCatalogo);
-        $this->CreateRegisterLog($response);
-
+        //$this->CreateRegisterLog($response);
         return $response;
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Catalogo  $catalogo
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Catalogo $catalogo)
+    public function destroy($id)
     {
-        //
+        $response = null;
+        $this->modelCatalogo = $this->modelCatalogo->find($id);
+
+        if ($this->modelCatalogo == null){
+            abort(400, trans('errors.901'));
+        }else {
+            $this->modelCatalogo->delete();
+            $response = response()->json([  'data'=> ['id'=> $id ]]);
+        }
+        //$this->CreateRegisterLog($response);
+        return $response;
     }
 
     /**

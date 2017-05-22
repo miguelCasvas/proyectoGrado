@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
-use App\Models\Estados;
+use App\Models\Estado;
 use Illuminate\Http\Request;
 
 class EstadoController extends Controller
 {
     //
     use CreateRegisterLog;
-    private $modelEstados = Estados::class;
+    private $modelEstado = Estado::class;
     private $userController;
 
     function __construct(){
 
-        $this->modelEstados = new Estados();
+        $this->modelEstado = new Estado();
         $this->userController = new UserController();
     }
 
@@ -28,11 +28,12 @@ class EstadoController extends Controller
     public function store(Request $request)
     {
 
-        $this->modelEstados->nombre_estado    = $request->get('nombreEstado');
-        $this->modelEstados->id_modulo    = $request->get('idModulo');
-        $this->modelEstados->save();
+        $this->modelEstado->nombre_estado    = $request->get('nombreEstado');
+        $this->modelEstado->canal    = $request->get('canal');
+        $this->modelEstado->id_modulo    = $request->get('idModulo');
+        $this->modelEstado->save();
 
-        $response = response()->json(['status'=>  200,'success'=>'success','data'=>$this->modelEstados]);
+        $response = response()->json(['data'=>$this->modelEstado]);
         # Creacion en modelo log
         $this->CreateRegisterLog($response);
 
@@ -48,10 +49,10 @@ class EstadoController extends Controller
      */
     public function show($id)
     {
-        $data = $this->modelEstados->find($id);
+        $data = $this->modelEstado->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
-        $this->CreateRegisterLog($response);
+        //$this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -63,7 +64,7 @@ class EstadoController extends Controller
      */
     public function index()
     {
-        $data = $this->modelEstados->all();
+        $data = $this->modelEstado->all();
         return response()->json([ "data"=> $data ]);
     }
 
@@ -77,19 +78,19 @@ class EstadoController extends Controller
     public function update(Request $request, $id)
     {
         $response = null;
-        $this->modelEstados = $this->modelEstados->find($id);
+        $this->modelEstados = $this->modelEstado->find($id);
 
-        if ($this->modelEstados == null){
+        if ($this->modelEstado == null){
             abort(400, trans('errors.901'));
         }
         else{
-            $this->modelEstados->nombre_estado    = $request->get('nombreEstado');
-            $this->modelEstados->id_modulo    = $request->get('idModulo');
-            $this->modelEstados->save();
-            $response = response()->json(['data'=>$this->modelEstados]);
+            $this->modelEstado->nombre_estado    = $request->get('nombreEstado');
+            $this->modelEstado->id_modulo    = $request->get('idModulo');
+            $this->modelEstado->save();
+            $response = response()->json(['data'=>$this->modelEstado]);
         }
 
-        $this->CreateRegisterLog($response);
+        //$this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -101,15 +102,16 @@ class EstadoController extends Controller
      */
     public function destroy($id)
     {
-        $this->modelEstados = $this->modelEstados->find($id);
+        $response = null;
+        $this->modelEstado = $this->modelEstado->find($id);
 
-        if ($this->modelEstados == null){
+        if ($this->modelEstado == null){
             abort(400, trans('errors.901'));
         }else {
-            $this->modelEstados->delete();
+            $this->modelEstado->delete();
             $response = response()->json([  'data'=> ['id'=> $id ]]);
         }
-        $this->CreateRegisterLog($response);
+        //$this->CreateRegisterLog($response);
         return $response;
     }
 }
