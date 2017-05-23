@@ -1,6 +1,4 @@
-<?php
-
-namespace App\Http\Controllers;
+<?php namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
 use App\Http\Requests\Permiso\StoreRequest;
@@ -29,11 +27,9 @@ class PermisoController extends Controller
         $this->modelPermiso->id_estado = $request->get('idEstado');
         $this->modelPermiso->id_roles = '.';
         $this->modelPermiso->save();
+        $this->CreateRegisterLog(json_encode(['data' => $this->modelPermiso]));
 
-        $response = ['data' => $this->modelPermiso];
-        $this->CreateRegisterLog($response);
-
-        return response()->json($response);
+        return response()->json(['data' => $this->modelPermiso]);
     }
 
     /**
@@ -52,11 +48,9 @@ class PermisoController extends Controller
         $this->modelPermiso->id_estado = $request->get('idEstado');
         $this->modelPermiso->id_roles = '.';
         $this->modelPermiso->save();
+        $this->CreateRegisterLog(json_encode(['data' => $this->modelPermiso]));
 
-        $response = ['data' => $this->modelPermiso];
-        $this->CreateRegisterLog($response);
-
-        return response()->json($response);
+        return response()->json(['data' => $this->modelPermiso]);
     }
 
     /**
@@ -84,6 +78,24 @@ class PermisoController extends Controller
 
         # Creacion en modelo log
         $this->CreateRegisterLog($response);
+        return $response;
+    }
+
+    /**
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy($id)
+    {
+        $this->modelPermiso = $this->modelPermiso->find($id);
+
+        if ($this->modelPermiso == null)
+            abort(400, trans('errors.901'));
+
+        $response = response()->json(['data' => $id]);
+        $this->modelPermiso->delete();
+        $this->CreateRegisterLog($response);
+
         return $response;
     }
 

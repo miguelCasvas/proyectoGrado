@@ -26,6 +26,9 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     # TIPO SALIDA
     Route::resource('tiposalida','TipoSalidaController');
 
+    # NOTIFICACIONES
+    Route::resource('notificacion','NotificacionController');
+
     # LOGIN
     //Route::resource('login', 'LoginController');
     //Route::post('contrasenia', 'UserController@contrasenia');

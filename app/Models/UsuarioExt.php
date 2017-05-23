@@ -12,4 +12,6 @@ class UsuarioExt extends Model
     protected $primaryKey = 'id_usuario_extension';
 
     protected $fillable = ['id_extension', 'id_usuario'];
+    
+    
 }
