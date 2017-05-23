@@ -34,11 +34,11 @@ class ConjuntoController extends Controller
         $this->modelConjunto->telefono     = $request->get('telefono');
         $this->modelConjunto->complemento     = $request->get('complemento');
         $this->modelConjunto->imagen     = $request->get('imagen');
-        $this->modelConjunto->id_ciudad     = $request->get('id_ciudad');
+        $this->modelConjunto->id_ciudad     = $request->get('idCiudad');
         $this->modelConjunto->save();
         $response = response()->json($this->modelConjunto);
         # Creacion en modelo log
-        $this->CreateRegisterLog($response);
+        //$this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -77,9 +77,13 @@ class ConjuntoController extends Controller
             abort(400, trans('errors.901'));
         }
         else{
-            $this->modelConjunto->indicativo    = $request->get('indicativo');
-            $this->modelConjunto->canal    = $request->get('canal');
-            $this->modelConjunto->id_conjunto    = $request->get('idConjunto');
+            $this->modelConjunto->nombre_conjunto     = $request->get('nombreConjunto');
+            $this->modelConjunto->direccion     = $request->get('direccion');
+            $this->modelConjunto->email     = $request->get('correo');
+            $this->modelConjunto->telefono     = $request->get('telefono');
+            $this->modelConjunto->complemento     = $request->get('complemento');
+            $this->modelConjunto->imagen     = $request->get('imagen');
+            $this->modelConjunto->id_ciudad     = $request->get('idCiudad');
             $this->modelConjunto->save();
             $response = response()->json(['data'=>$this->modelConjunto]);
         }
