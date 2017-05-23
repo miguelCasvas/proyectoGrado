@@ -17,7 +17,7 @@ trait CreateRegisterLog
                     'request' => request()->fullUrl(),
                     'log' => $response,
                     'id_usuario' => Authorizer::getResourceOwnerId(),
-                    'id_client' => Authorizer::getClientId()
+                    'id_cliente' => Authorizer::getClientId()
                 ];
 
             Log::create($data);

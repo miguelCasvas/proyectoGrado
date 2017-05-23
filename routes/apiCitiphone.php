@@ -17,24 +17,37 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     # USUARIO
     Route::resource('usuarios', 'usuarioController');
 
+    # EXTENSION DE USUARIO
+    Route::resource('usuarioextension', 'UsuarioExtensionController');
+
+    # UBICACION DE CATALOGO
+    Route::resource('ubicacioncatalogo', 'UbicacionCatalogoController');
+
+    # TIPO SALIDA
+    Route::resource('tiposalida','TipoSalidaController');
+
+    # NOTIFICACIONES
+    Route::resource('notificacion','NotificacionController');
+
     # LOGIN
-    Route::resource('login', 'LoginController');
-    Route::post('contrasenia', 'UserController@contrasenia');
+    //Route::resource('login', 'LoginController');
+    //Route::post('contrasenia', 'UserController@contrasenia');
 
     # CONJUNTO
+
     Route::resource('conjunto', 'ConjuntoController');
 
     # CATALOGO
-    Route::resource('catalogo', 'CatalogoController');
+    //Route::resource('catalogo', 'CatalogoController');
 
     # PERMISOS
-    Route::resource('permisos', 'PermisosController');
+    Route::resource('permisos', 'PermisoController');
 
     # ROL
-    Route::resource('rol', 'RolController');
+    Route::resource('roles', 'RolController');
 
     # TIPOS SALIDAS
-    Route::resource('tipossalidas', 'TipoSalidaController');
+    //Route::resource('tipossalidas', 'TipoSalidaController');
 
     // ESTADOS
     Route::resource('estado', 'EstadoController');
@@ -53,6 +66,5 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
 
     // LOG
     Route::resource('log', 'LogController');
-
 
 });
