@@ -17,9 +17,12 @@ Route::get('/', function () {
 
 Route::get('/register',function(){$user = new App\User();
     $user->name="test user";
- $user->email="test@test.com";
- $user->password = \Illuminate\Support\Facades\Hash::make("password");
- $user->save();
+    $user->email="test@test.com";
+    //$user->password = \Illuminate\Support\Facades\Hash::make("password");
+    $user->password = "password";
+    $user->is_estado_contrasenia = "1";
+    $user->id_usuario = "1";
+    $user->save();
 });
 
 Route::post('oauth/access_token', function() {

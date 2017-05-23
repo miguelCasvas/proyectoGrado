@@ -18,7 +18,6 @@ class ConjuntoController extends Controller
     function __construct()
     {
         $this->modelConjunto = new Conjunto();
-        //$this->userController = new UserController();
     }
 
     /**
@@ -36,8 +35,6 @@ class ConjuntoController extends Controller
         $this->modelConjunto->complemento     = $request->get('complemento');
         $this->modelConjunto->imagen     = $request->get('imagen');
         $this->modelConjunto->id_ciudad     = $request->get('id_ciudad');
-        $this->modelConjunto->id_catalogo     = $request->get('id_catalogo');
-        $this->modelConjunto->id_usuario     = $request->get('id_usuario');
         $this->modelConjunto->save();
         $response = response()->json($this->modelConjunto);
         # Creacion en modelo log
@@ -51,9 +48,14 @@ class ConjuntoController extends Controller
      * @param  \App\Models\Conjunto  $conjunto
      * @return \Illuminate\Http\Response
      */
-    public function show(Conjunto $conjunto)
+    public function show($id)
     {
         //
+        $data = $this->modelConjunto->find($id);
+        $response = response()->json([ 'data'=> $data ]);
+        # Creacion en modelo log
+        //$this->CreateRegisterLog($response);
+        return $response;
     }
 
 
@@ -65,9 +67,25 @@ class ConjuntoController extends Controller
      * @param  \App\Models\Conjunto  $conjunto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Conjunto $conjunto)
+    public function update(Request $request, $id)
     {
         //
+        $response = null;
+        $this->modelConjunto = $this->modelConjunto->find($id);
+//
+        if ($this->modelConjunto == null ){
+            abort(400, trans('errors.901'));
+        }
+        else{
+            $this->modelConjunto->indicativo    = $request->get('indicativo');
+            $this->modelConjunto->canal    = $request->get('canal');
+            $this->modelConjunto->id_conjunto    = $request->get('idConjunto');
+            $this->modelConjunto->save();
+            $response = response()->json(['data'=>$this->modelConjunto]);
+        }
+
+        //$this->CreateRegisterLog($response);
+        return $response;
     }
 
     /**
@@ -76,8 +94,34 @@ class ConjuntoController extends Controller
      * @param  \App\Models\Conjunto  $conjunto
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Conjunto $conjunto)
+    public function destroy($id)
     {
-        //
+        $response = null;
+        $this->modelConjunto = $this->modelConjunto->find($id);
+
+        if ($this->modelConjunto == null){
+            abort(400, trans('errors.901'));
+        }else {
+            $this->modelConjunto->delete();
+            $response = response()->json([  'data'=> ['id'=> $id ]]);
+        }
+        //$this->CreateRegisterLog($response);
+        return $response;
+    }
+
+    /**
+     * Validate if exist conjunto
+     * @param $id
+     * @return string with conjunto name
+     */
+    public function nombreConjunto($id)
+    {
+        $data = $this->modelConjunto->find($id);
+        if($data == null){
+            $response = "";
+        }else{
+            $response = $data["attributes"]["nombre_conjunto"];
+        }
+        return $response;
     }
 }

@@ -34,7 +34,8 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     //Route::post('contrasenia', 'UserController@contrasenia');
 
     # CONJUNTO
-    //Route::resource('conjuntos', 'ConjuntoController');
+
+    Route::resource('conjunto', 'ConjuntoController');
 
     # CATALOGO
     //Route::resource('catalogo', 'CatalogoController');
@@ -48,7 +49,22 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     # TIPOS SALIDAS
     //Route::resource('tipossalidas', 'TipoSalidaController');
 
-    # ESTADOS
-    //Route::resource('estados', 'EstadoController');
+    // ESTADOS
+    Route::resource('estado', 'EstadoController');
+
+    // CANAL DE COMUNICACION
+    Route::resource('canalcomunicacion', 'CanalComunicacionController');
+
+    // CATALOGO
+    Route::resource('catalogo', 'CatalogoController');
+
+    // CIUDAD
+    Route::resource('ciudad', 'CiudadController');
+
+    // HISTORIAL
+    Route::resource('historial', 'HistorialController');
+
+    // LOG
+    Route::resource('log', 'LogController');
 
 });
