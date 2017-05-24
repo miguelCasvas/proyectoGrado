@@ -34,7 +34,6 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     //Route::post('contrasenia', 'UserController@contrasenia');
 
     # CONJUNTO
-
     Route::resource('conjunto', 'ConjuntoController');
 
     # CATALOGO
@@ -63,6 +62,9 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
 
     // HISTORIAL
     Route::resource('historial', 'HistorialController');
+
+    // MODULO
+    Route::resource('modulo', 'ModuloController');
 
     // LOG
     Route::resource('log', 'LogController');
