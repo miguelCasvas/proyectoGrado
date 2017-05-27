@@ -3,20 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
-use App\Http\Requests\Marcado\StoreRequest;
-use App\Models\Marcado;
+use App\Http\Requests\Extension\StoreRequest;
+use App\models\Extension;
 use Illuminate\Http\Request;
 
-class MarcadoController extends Controller
+class ExtensionController extends Controller
 {
-    //
     use CreateRegisterLog;
-    private $modelMarcado = Marcado::class;
+    private $modelExtension = Extension::class;
     private $userController;
 
     function __construct(){
 
-        $this->modelMarcado = new Marcado();
+        $this->modelExtension  = new Extension();
         $this->userController = new UserController();
     }
 
@@ -29,12 +28,12 @@ class MarcadoController extends Controller
     public function store(StoreRequest $request)
     {
 
-        $this->modelMarcado->secuencia_marcado    = $request->get('secuenciaMarcado');
-        $this->modelMarcado->id_extension    = $request->get('idExtension');
-        $this->modelMarcado->id_tipo_salida    = $request->get('idTipoSalida');
-        $this->modelMarcado->save();
+        $this->modelExtension->extension    = $request->get('extension');
+        $this->modelExtension->id_conjunto    = $request->get('idConjunto');
+        $this->modelExtension->id_estado    = $request->get('idEstado');
+        $this->modelExtension->save();
 
-        $response = response()->json(['data'=>$this->modelMarcado]);
+        $response = response()->json(['data'=>$this->modelExtension]);
         # Creacion en modelo log
         $this->CreateRegisterLog($response);
 
@@ -50,7 +49,7 @@ class MarcadoController extends Controller
      */
     public function show($id)
     {
-        $data = $this->modelMarcado->find($id);
+        $data = $this->modelExtension->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
         $this->CreateRegisterLog($response);
@@ -65,7 +64,7 @@ class MarcadoController extends Controller
      */
     public function index()
     {
-        $data = $this->modelMarcado->all();
+        $data = $this->modelExtension->all();
         return response()->json([ "data"=> $data ]);
     }
 
@@ -79,17 +78,17 @@ class MarcadoController extends Controller
     public function update(StoreRequest $request, $id)
     {
         $response = null;
-        $this->modelMarcado = $this->modelMarcado->find($id);
+        $this->modelExtension = $this->modelExtension->find($id);
 
-        if ($this->modelMarcado == null){
+        if ($this->modelExtension == null){
             abort(400, trans('errors.901'));
         }
         else{
-            $this->modelMarcado->secuencia_marcado    = $request->get('secuenciaMarcado');
-            $this->modelMarcado->id_extension    = $request->get('idExtension');
-            $this->modelMarcado->id_tipo_salida    = $request->get('idTipoSalida');
-            $this->modelMarcado->save();
-            $response = response()->json(['data'=>$this->modelMarcado]);
+            $this->modelExtension->extension    = $request->get('extension');
+            $this->modelExtension->id_conjunto    = $request->get('idConjunto');
+            $this->modelExtension->id_estado    = $request->get('idEstado');
+            $this->modelExtension->save();
+            $response = response()->json(['data'=>$this->modelExtension]);
         }
 
         $this->CreateRegisterLog($response);
@@ -105,12 +104,12 @@ class MarcadoController extends Controller
     public function destroy($id)
     {
         $response = null;
-        $this->modelMarcado = $this->modelMarcado->find($id);
+        $this->modelExtension = $this->modelExtension->find($id);
 
-        if ($this->modelMarcado == null){
+        if ($this->modelExtension == null){
             abort(400, trans('errors.901'));
         }else {
-            $this->modelMarcado->delete();
+            $this->modelExtension->delete();
             $response = response()->json([  'data'=> ['id'=> $id ]]);
         }
         $this->CreateRegisterLog($response);

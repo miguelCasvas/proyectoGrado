@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\CanalComunicacion;
+namespace App\Http\Requests\Conjunto;
 
 use App\Http\Requests\FormRequestToAPI\FormRequestToAPI;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequestToAPI
 {
-    /**
+     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
@@ -15,9 +15,11 @@ class StoreRequest extends FormRequestToAPI
     public function rules()
     {
         return [
-            'indicativo' => ['required'],
-            'canal' => ['required'],
-            'idConjunto' => ['required', 'numeric','exists:modulos,id_modulo']
+            'idCiudad'=>['required', 'numeric','exists:ciudades,id_ciudad'],
+            'nombreConjunto' => ['required'],
+            'direccion' => ['required'],
+            'correo' => ['required'],
+            'telefono' => ['required','numeric']
         ];
     }
 }

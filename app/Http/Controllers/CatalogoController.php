@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
+use App\Http\Requests\Catalogo\StoreRequest;
 use App\Models\Catalogo;
 use Illuminate\Http\Request;
 
@@ -28,11 +29,8 @@ class CatalogoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-
-        $this->busquedaConjunto();
-
         $this->modelCatalogo->nombre_Catalogo = $request->get('nombreCatalogo');
         $this->modelCatalogo->id_conjunto = $request->get('idConjunto');
         $this->modelCatalogo->save();
@@ -53,7 +51,7 @@ class CatalogoController extends Controller
         $data = $this->modelCatalogo->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
     /**
@@ -75,7 +73,7 @@ class CatalogoController extends Controller
      * @param  \App\Models\Catalogo  $catalogo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
         $response = null;
         $this->modelCatalogo = $this->modelCatalogo->find($id);
@@ -84,13 +82,13 @@ class CatalogoController extends Controller
             abort(400, trans('errors.901'));
         }
         else{
-            $this->modelCatalogo->nombre_estado    = $request->get('nombreEstado');
-            $this->modelCatalogo->id_modulo    = $request->get('idModulo');
+            $this->modelCatalogo->nombre_Catalogo = $request->get('nombreCatalogo');
+            $this->modelCatalogo->id_conjunto = $request->get('idConjunto');
             $this->modelCatalogo->save();
             $response = response()->json(['data'=>$this->modelCatalogo]);
         }
 
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -111,7 +109,7 @@ class CatalogoController extends Controller
             $this->modelCatalogo->delete();
             $response = response()->json([  'data'=> ['id'=> $id ]]);
         }
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 

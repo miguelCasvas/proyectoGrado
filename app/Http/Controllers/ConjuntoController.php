@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
+use App\Http\Requests\Conjunto\StoreRequest;
 use App\Models\Conjunto;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,7 @@ class ConjuntoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $this->modelConjunto->nombre_conjunto     = $request->get('nombreConjunto');
         $this->modelConjunto->direccion     = $request->get('direccion');
@@ -38,7 +39,7 @@ class ConjuntoController extends Controller
         $this->modelConjunto->save();
         $response = response()->json($this->modelConjunto);
         # Creacion en modelo log
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -58,6 +59,17 @@ class ConjuntoController extends Controller
         return $response;
     }
 
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $data = $this->modelConjunto->all();
+        return response()->json([ "data"=> $data ]);
+    }
 
 
     /**
@@ -67,7 +79,7 @@ class ConjuntoController extends Controller
      * @param  \App\Models\Conjunto  $conjunto
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
         //
         $response = null;
@@ -113,19 +125,5 @@ class ConjuntoController extends Controller
         return $response;
     }
 
-    /**
-     * Validate if exist conjunto
-     * @param $id
-     * @return string with conjunto name
-     */
-    public function nombreConjunto($id)
-    {
-        $data = $this->modelConjunto->find($id);
-        if($data == null){
-            $response = "";
-        }else{
-            $response = $data["attributes"]["nombre_conjunto"];
-        }
-        return $response;
-    }
+
 }

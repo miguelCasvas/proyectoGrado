@@ -34,11 +34,7 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
     //Route::post('contrasenia', 'UserController@contrasenia');
 
     # CONJUNTO
-
     Route::resource('conjunto', 'ConjuntoController');
-
-    # CATALOGO
-    //Route::resource('catalogo', 'CatalogoController');
 
     # PERMISOS
     Route::resource('permisos', 'PermisoController');
@@ -51,6 +47,9 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
 
     // ESTADOS
     Route::resource('estado', 'EstadoController');
+
+    // EXTENSIONES
+    Route::resource('extension', 'ExtensionController');
 
     // CANAL DE COMUNICACION
     Route::resource('canalcomunicacion', 'CanalComunicacionController');
@@ -66,5 +65,8 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
 
     // LOG
     Route::resource('log', 'LogController');
+
+    //MARCADO
+    Route::resource('marcado','marcadoController');
 
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
+use App\Http\Requests\Estado\StoreRequest;
 use App\Models\Estado;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,6 @@ class EstadoController extends Controller
     private $userController;
 
     function __construct(){
-
         $this->modelEstado = new Estado();
         $this->userController = new UserController();
     }
@@ -25,11 +25,10 @@ class EstadoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
 
         $this->modelEstado->nombre_estado    = $request->get('nombreEstado');
-        $this->modelEstado->canal    = $request->get('canal');
         $this->modelEstado->id_modulo    = $request->get('idModulo');
         $this->modelEstado->save();
 
@@ -52,7 +51,7 @@ class EstadoController extends Controller
         $data = $this->modelEstado->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -75,10 +74,10 @@ class EstadoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
         $response = null;
-        $this->modelEstados = $this->modelEstado->find($id);
+        $this->modelEstado = $this->modelEstado->find($id);
 
         if ($this->modelEstado == null){
             abort(400, trans('errors.901'));
@@ -90,7 +89,7 @@ class EstadoController extends Controller
             $response = response()->json(['data'=>$this->modelEstado]);
         }
 
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -111,7 +110,7 @@ class EstadoController extends Controller
             $this->modelEstado->delete();
             $response = response()->json([  'data'=> ['id'=> $id ]]);
         }
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 }

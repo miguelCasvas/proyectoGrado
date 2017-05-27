@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
+use App\Http\Requests\Historial\StoreRequest;
 use App\Models\Historial;
 use Illuminate\Http\Request;
+use LucaDegasperi\OAuth2Server\Facades\Authorizer;
 
 class HistorialController extends Controller
 {
@@ -25,11 +27,12 @@ class HistorialController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
 
         $this->modelHistorial->accion    = $request->get('accion');
-        $this->modelHistorial->id_usuario    = $request->get('idUsuario');
+        // se debe traer de forma automática el usuario actual
+        $this->modelHistorial->id_usuario    = Authorizer::getResourceOwnerId();
         $this->modelHistorial->id_usuario_m    = $request->get('idUsuarioM');
         $this->modelHistorial->id_modulo    = $request->get('idModulo');
         $this->modelHistorial->save();
@@ -53,7 +56,7 @@ class HistorialController extends Controller
         $data = $this->modelHistorial->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -76,7 +79,7 @@ class HistorialController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
         $response = null;
         $this->modelHistorial = $this->modelHistorial->find($id);
@@ -86,14 +89,14 @@ class HistorialController extends Controller
         }
         else{
             $this->modelHistorial->accion    = $request->get('accion');
-            $this->modelHistorial->id_usuario    = $request->get('idUsuario');
+            $this->modelHistorial->id_usuario    = Authorizer::getResourceOwnerId();
             $this->modelHistorial->id_usuario_m    = $request->get('idUsuarioM');
             $this->modelHistorial->id_modulo    = $request->get('idModulo');
             $this->modelHistorial->save();
             $response = response()->json(['data'=>$this->modelHistorial]);
         }
 
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -114,7 +117,7 @@ class HistorialController extends Controller
             $this->modelHistorial->delete();
             $response = response()->json([  'data'=> ['id'=> $id ]]);
         }
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 }

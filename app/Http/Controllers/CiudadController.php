@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
+use App\Http\Requests\Ciudad\StoreRequest;
 use App\Models\Ciudad;
 use Illuminate\Http\Request;
 
@@ -25,12 +26,10 @@ class CiudadController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
 
-        $this->modelCiudad->nombre_estado    = $request->get('nombreEstado');
-        $this->modelCiudad->canal    = $request->get('canal');
-        $this->modelCiudad->id_modulo    = $request->get('idModulo');
+        $this->modelCiudad->nombre_ciudad    = $request->get('nombreCiudad');
         $this->modelCiudad->save();
 
         $response = response()->json(['data'=>$this->modelCiudad]);
@@ -52,7 +51,7 @@ class CiudadController extends Controller
         $data = $this->modelCiudad->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -75,7 +74,7 @@ class CiudadController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
         $response = null;
         $this->modelCiudad = $this->modelCiudad->find($id);
@@ -84,8 +83,7 @@ class CiudadController extends Controller
             abort(400, trans('errors.901'));
         }
         else{
-            $this->modelCiudad->nombre_estado    = $request->get('nombreEstado');
-            $this->modelCiudad->id_modulo    = $request->get('idModulo');
+            $this->modelCiudad->nombre_ciudad    = $request->get('nombreCiudad');
             $this->modelCiudad->save();
             $response = response()->json(['data'=>$this->modelCiudad]);
         }

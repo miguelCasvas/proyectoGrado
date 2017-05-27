@@ -1,12 +1,14 @@
 <?php
 
-namespace App\Http\Requests\CanalComunicacion;
+namespace App\Http\Requests\Historial;
 
 use App\Http\Requests\FormRequestToAPI\FormRequestToAPI;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreRequest extends FormRequestToAPI
 {
+
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -15,9 +17,9 @@ class StoreRequest extends FormRequestToAPI
     public function rules()
     {
         return [
-            'indicativo' => ['required'],
-            'canal' => ['required'],
-            'idConjunto' => ['required', 'numeric','exists:modulos,id_modulo']
+            'accion'=>['required'],
+            'idModulo'=>['required','numeric','exists:modulos,id_modulo'],
+            'idUsuarioM'=>['required','numeric','exists:usuarios,id_usuario']
         ];
     }
 }

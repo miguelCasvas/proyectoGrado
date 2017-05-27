@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Traits\CreateRegisterLog;
+use App\Http\Requests\CanalComunicacion\StoreRequest;
 use App\Models\CanalComunicacion;
 use Illuminate\Http\Request;
 
@@ -29,27 +30,21 @@ class CanalComunicacionController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
         $response = null;
-        $conjunto = $this->conjuntoController->nombreConjunto($request->get('idConjunto'));
-        //dd($conjunto);
-        if($conjunto == ""){
-            abort(400, trans('errors.901'));
-        }else{
-            $this->modelCanalComunicacion->indicativo    = $request->get('indicativo');
-            $this->modelCanalComunicacion->canal    = $request->get('canal');
-            $this->modelCanalComunicacion->id_conjunto    = $request->get('idConjunto');
-            $this->modelCanalComunicacion->save();
 
-            // $conjunto;
-            $this->modelCanalComunicacion->nombre_conjunto    = $conjunto;
-            $response = response()->json(['data'=>$this->modelCanalComunicacion]);
-        }
+        $this->modelCanalComunicacion->indicativo    = $request->get('indicativo');
+        $this->modelCanalComunicacion->canal    = $request->get('canal');
+        $this->modelCanalComunicacion->id_conjunto    = $request->get('idConjunto');
+        $this->modelCanalComunicacion->save();
 
+        // $conjunto;
+        //$this->modelCanalComunicacion->nombre_conjunto    = $conjunto;
+        $response = response()->json(['data'=>$this->modelCanalComunicacion]);
 
         # Creacion en modelo log
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
 
         return $response;
     }
@@ -66,7 +61,7 @@ class CanalComunicacionController extends Controller
         $data = $this->modelCanalComunicacion->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -89,9 +84,8 @@ class CanalComunicacionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(StoreRequest $request, $id)
     {
-        //$this->conjuntoController = $this->conjuntoController->find($request->get('idConjunto'));
         $this->modelCanalComunicacion = $this->modelCanalComunicacion->find($id);
 //
         if ($this->modelCanalComunicacion == null ){
@@ -105,7 +99,7 @@ class CanalComunicacionController extends Controller
             $response = response()->json(['data'=>$this->modelCanalComunicacion]);
         }
 
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 
@@ -125,7 +119,7 @@ class CanalComunicacionController extends Controller
             $this->modelCanalComunicacion->delete();
             $response = response()->json([  'data'=> ['id'=> $id ]]);
         }
-        //$this->CreateRegisterLog($response);
+        $this->CreateRegisterLog($response);
         return $response;
     }
 }
