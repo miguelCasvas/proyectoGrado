@@ -73,6 +73,9 @@ Route::group(['prefix'=>'','before' => 'permisosUsuario'], function()
     Route::resource('log', 'LogController');
 
     //MARCADO
-    Route::resource('marcado','marcadoController');
+    Route::resource('marcado','MarcadoController');
+
+    // PERMISO POR ROL
+    Route::resource('permisorol','PermisosRolController');
 
 });
