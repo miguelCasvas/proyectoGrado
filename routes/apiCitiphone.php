@@ -9,7 +9,7 @@
 //    return Response::json($user);
 //}]);
 
-Route::group(['prefix'=>'','before' => 'oauth'], function()
+Route::group(['prefix'=>'','before' => 'permisosUsuario'], function()
 {
     //Route::post('usuarios', 'usuarioController@store');
     //Route::get('demo', 'usuarioController@demo');

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateTableExtensiones extends Migration
+class CreateTableModelos extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,9 @@ class CreateTableExtensiones extends Migration
      */
     public function up()
     {
-        Schema::create('extensiones', function (Blueprint $table) {
-            $table->increments('id_extension');
-            $table->string('extension', 50);
-
-            # FK
-            $table->integer('id_conjunto')->unsigned();
-            $table->integer('id_estado')->unsigned();
-
+        Schema::create('modelos', function (Blueprint $table) {
+            $table->increments('id_modelo');
+            $table->string('nombre_modelo', 100);
             $table->timestamps();
         });
     }
@@ -32,6 +27,6 @@ class CreateTableExtensiones extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('extensiones');
+        Schema::dropIfExists('modelos');
     }
 }

@@ -77,6 +77,10 @@ class CargueDemo extends Seeder
             'id_canal' => 1
         ]);
 
+        # CARGUE MODELOS
+        \DB::table('modelos')->insert(['nombre_modelo' => 'extensiones']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'permisos']);
+
         # CARGUE MODULOS
         \DB::table('modulos')->insert(['nombre_modulo' => 'extensiones']);
         \DB::table('modulos')->insert(['nombre_modulo' => 'permisos']);

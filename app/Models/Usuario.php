@@ -21,4 +21,5 @@ class Usuario extends Model
     {
         return $this->hasMany(\App\Models\CanalComunicacion::class, 'id_usuario', 'id_usuario');
     }
+
 }

@@ -15,7 +15,6 @@ class UsuarioExtensionController extends Controller
     private $userController;
 
     function __construct(){
-
         $this->modelUsuarioExtensiones = new UsuarioExt();
         $this->userController = new UserController();
     }
@@ -26,6 +25,9 @@ class UsuarioExtensionController extends Controller
      */
     public function index()
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuarioExtensiones->getTable(),'Lectura');
+
         $data = $this->modelUsuarioExtensiones->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -48,6 +50,9 @@ class UsuarioExtensionController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuarioExtensiones->getTable(),'Creacion');
+
         $this->modelUsuarioExtensiones->id_extension = $request->get('idExtension');
         $this->modelUsuarioExtensiones->id_usuario = $request->get('idUsuario');
         $this->modelUsuarioExtensiones->save();
