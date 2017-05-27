@@ -66,10 +66,16 @@ Route::group(['prefix'=>'','before' => 'permisosUsuario'], function()
     // MODULO
     Route::resource('modulo', 'ModuloController');
 
+    // MODELO
+    Route::resource('modelo', 'ModeloController');
+
     // LOG
     Route::resource('log', 'LogController');
 
     //MARCADO
-    Route::resource('marcado','marcadoController');
+    Route::resource('marcado','MarcadoController');
+
+    // PERMISO POR ROL
+    Route::resource('permisorol','PermisosRolController');
 
 });
