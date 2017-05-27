@@ -50,6 +50,7 @@ class MigrationServiceProvider extends ServiceProvider
             $routeMigrations.'model_Login/',
             $routeMigrations.'model_Marcados/',
             $routeMigrations.'model_Modulos/',
+            $routeMigrations.'model_Modelos/',
             $routeMigrations.'model_Notificacion/',
             $routeMigrations.'model_Permisos/',
             $routeMigrations.'model_Permisos_por_rol/',

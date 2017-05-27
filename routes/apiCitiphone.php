@@ -9,7 +9,7 @@
 //    return Response::json($user);
 //}]);
 
-Route::group(['prefix'=>'','before' => 'oauth'], function()
+Route::group(['prefix'=>'','before' => 'permisosUsuario'], function()
 {
     //Route::post('usuarios', 'usuarioController@store');
     //Route::get('demo', 'usuarioController@demo');
@@ -62,6 +62,9 @@ Route::group(['prefix'=>'','before' => 'oauth'], function()
 
     // HISTORIAL
     Route::resource('historial', 'HistorialController');
+
+    // MODULO
+    Route::resource('modulo', 'ModuloController');
 
     // LOG
     Route::resource('log', 'LogController');
