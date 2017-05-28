@@ -28,6 +28,8 @@ class TipoSalidaController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelTiposSalidas->getTable(), 1);
 
         $this->modelTiposSalidas->nombre_tipo_salida    = $request->get('nombreTipoSalida');
         $this->modelTiposSalidas->id_marcado    = $request->get('idMarcado');
@@ -50,6 +52,9 @@ class TipoSalidaController extends Controller
      */
     public function show($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelTiposSalidas->getTable(), 2);
+
         $data = $this->modelTiposSalidas->find($id);
         $numError = 200;
 
@@ -69,6 +74,9 @@ class TipoSalidaController extends Controller
      */
     public function index()
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelTiposSalidas->getTable(), 2);
+
         $data = $this->modelTiposSalidas->all();
 
         return response()->json([ 'data'=> $data ]);
@@ -83,6 +91,9 @@ class TipoSalidaController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelTiposSalidas->getTable(), 3);
+
         $response = null;
         $this->modelTiposSalidas = $this->modelTiposSalidas->find($id);
 
@@ -110,6 +121,9 @@ class TipoSalidaController extends Controller
      */
     public function destroy($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelTiposSalidas->getTable(), 4);
+
         $this->modelTiposSalidas = $this->modelTiposSalidas->find($id);
 
         if ($this->modelTiposSalidas == null){

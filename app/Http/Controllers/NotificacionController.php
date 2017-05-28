@@ -23,6 +23,9 @@ class NotificacionController extends Controller
      */
     public function index()
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelNotificacion->getTable(), 2);
+
         $response = response()->json(['data' => $this->modelNotificacion->all()]);
         $this->CreateRegisterLog($response);
         return $response;
@@ -34,6 +37,9 @@ class NotificacionController extends Controller
      */
     public function show($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelNotificacion->getTable(), 2);
+
         $response = response()->json(['data' => $this->modelNotificacion->find($id)]);
         $this->CreateRegisterLog($response);
 
@@ -46,6 +52,9 @@ class NotificacionController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelNotificacion->getTable(), 1);
+
         $this->modelNotificacion->mensaje = $request->get('mensaje');
         $this->modelNotificacion->save();
 
@@ -62,6 +71,9 @@ class NotificacionController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelNotificacion->getTable(), 3);
+
         $this->modelNotificacion = $this->modelNotificacion->find($id);
 
         if ($this->modelNotificacion == null)
@@ -76,6 +88,9 @@ class NotificacionController extends Controller
      */
     public function destroy($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelNotificacion->getTable(), 4);
+
         $this->modelNotificacion = $this->modelNotificacion->find($id);
 
         if ($this->modelNotificacion == null)

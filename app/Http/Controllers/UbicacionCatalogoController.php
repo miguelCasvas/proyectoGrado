@@ -25,6 +25,9 @@ class UbicacionCatalogoController extends Controller
 
     public function index()
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUbicacionCatalogo->getTable(), 2);
+
         $data = $this->modelUbicacionCatalogo->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -36,6 +39,9 @@ class UbicacionCatalogoController extends Controller
      */
     public function show($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUbicacionCatalogo->getTable(), 2);
+
         $data = ['data' => $this->modelUbicacionCatalogo->find($id)];
         return response()->json($data);
     }
@@ -47,6 +53,9 @@ class UbicacionCatalogoController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUbicacionCatalogo->getTable(), 1);
+
         $this->modelUbicacionCatalogo->nombre_ubicacion_catalogo = $request->get('nombreUbicacionCatalogo');
         $this->modelUbicacionCatalogo->id_catalogo = $request->get('idCatalogo');
         $this->modelUbicacionCatalogo->save();
@@ -67,6 +76,9 @@ class UbicacionCatalogoController extends Controller
      */
     public function update( UpdateRequest $request, $id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUbicacionCatalogo->getTable(), 3);
+
         $this->modelUbicacionCatalogo = $this->modelUbicacionCatalogo->find($id);
 
         if ($this->modelUbicacionCatalogo == null){
@@ -92,6 +104,9 @@ class UbicacionCatalogoController extends Controller
      */
     public function destroy($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUbicacionCatalogo->getTable(), 4);
+
         $this->modelUbicacionCatalogo = $this->modelUbicacionCatalogo->find($id);
         if ($this->modelUbicacionCatalogo == null){
             abort(400, trans('errors.901'));

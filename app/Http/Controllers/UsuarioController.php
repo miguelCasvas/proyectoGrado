@@ -39,6 +39,8 @@ class usuarioController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuario->getTable(), 1);
 
         $this->modelUsuario->nombres            = $request->get('nombres');
         $this->modelUsuario->apellidos          = $request->get('apellidos');
@@ -67,6 +69,9 @@ class usuarioController extends Controller
      */
     public function show($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuario->getTable(), 2);
+
         $data = ['data' => $this->modelUsuario->find($id)];
         return response()->json($data);
     }
@@ -80,23 +85,23 @@ class usuarioController extends Controller
      */
     public function update(UpdateRequest $request, $id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuario->getTable(), 3);
+
         $response = null;
         $this->modelUsuario = $this->modelUsuario->find($id);
 
-        if ($this->modelUsuario == null){
+        if ($this->modelUsuario == null)
             abort(400, trans('errors.901'));
-        }
-        else{
-            $this->modelUsuario->nombres            = $request->get('nombres');
-            $this->modelUsuario->apellidos          = $request->get('apellidos');
-            $this->modelUsuario->email              = $request->get('correo');
-            $this->modelUsuario->identificacion     = $request->get('identificacion');
-            $this->modelUsuario->fecha_nacimiento   = $request->get('fechaNacimiento');
-            $this->modelUsuario->save();
 
-            $response = response()->json($this->modelUsuario);
-        }
+        $this->modelUsuario->nombres            = $request->get('nombres');
+        $this->modelUsuario->apellidos          = $request->get('apellidos');
+        $this->modelUsuario->email              = $request->get('correo');
+        $this->modelUsuario->identificacion     = $request->get('identificacion');
+        $this->modelUsuario->fecha_nacimiento   = $request->get('fechaNacimiento');
+        $this->modelUsuario->save();
 
+        $response = response()->json($this->modelUsuario);
         $this->CreateRegisterLog($response);
 
         return $response;
@@ -110,6 +115,9 @@ class usuarioController extends Controller
      */
     public function destroy($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuario->getTable(), 4);
+
         $this->modelUsuario = $this->modelUsuario->find($id);
 
         if ($this->modelUsuario == null){

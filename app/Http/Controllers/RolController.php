@@ -28,6 +28,8 @@ class RolController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelRol->getTable(), 1);
 
         $this->modelRol->nombre_rol    = $request->get('nombreRole');
         $this->modelRol->save();
@@ -48,6 +50,9 @@ class RolController extends Controller
      */
     public function show($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelRol->getTable(), 2);
+
         $data = $this->modelRol->find($id);
         $response = response()->json([ 'data' => $data ]);
         # Creacion en modelo log
@@ -63,6 +68,9 @@ class RolController extends Controller
      */
     public function index()
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelRol->getTable(), 2);
+
         $data = $this->modelRol->all();
 
         return response()->json(['data' => $data ]);
@@ -77,6 +85,9 @@ class RolController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelRol->getTable(), 3);
+
         $response = null;
         $this->modelRol = $this->modelRol->find($id);
 
@@ -102,6 +113,9 @@ class RolController extends Controller
      */
     public function destroy($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelRol->getTable(), 4);
+
         $this->modelRol = $this->modelRol->find($id);
 
         if ($this->modelRol == null){

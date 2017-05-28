@@ -25,6 +25,9 @@ class PermisosRolController extends Controller
      */
     public function index()
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelPermisoRol->getTable(), 2);
+
         $data = $this->modelPermisoRol->all();
         $response = response()->json(['data' => $data]);
         $this->CreateRegisterLog($response);
@@ -39,6 +42,9 @@ class PermisosRolController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelPermisoRol->getTable(), 1);
+
         $this->modelPermisoRol->id_rol = $request->get('idRol');
         $this->modelPermisoRol->id_permiso = $request->get('idPermiso');
         $this->modelPermisoRol->id_modelo = $request->get('idModelo');
@@ -57,6 +63,9 @@ class PermisosRolController extends Controller
      */
     public function show($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelPermisoRol->getTable(), 2);
+
         $data = $this->modelPermisoRol->find($id);
         $response = response()->json(['data' => $data]);
         $this->CreateRegisterLog($response);
@@ -72,6 +81,9 @@ class PermisosRolController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelPermisoRol->getTable(), 3);
+
         $this->modelPermisoRol = $this->modelPermisoRol->find($id);
 
         if ($this->modelPermisoRol == null)
@@ -88,6 +100,9 @@ class PermisosRolController extends Controller
      */
     public function destroy($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelPermisoRol->getTable(), 4);
+
         $this->modelPermisoRol = $this->modelPermisoRol->find($id);
 
         if ($this->modelPermisoRol == null)
