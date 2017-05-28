@@ -23,6 +23,7 @@ class logController extends Controller
      */
     public function index()
     {
+        $this->validarPermisos($this->modelLog->getTable(), 2);
         $data = $this->modelLog->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -34,6 +35,7 @@ class logController extends Controller
      */
     public function create(array $data)
     {
+        $this->validarPermisos($this->modelLog->getTable(), 1);
         $this->modelLog->create($data);
     }
 }

@@ -28,7 +28,7 @@ class MarcadoController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
+        $this->validarPermisos($this->modelMarcado->getTable(), 1);
         $this->modelMarcado->secuencia_marcado    = $request->get('secuenciaMarcado');
         $this->modelMarcado->id_extension    = $request->get('idExtension');
         $this->modelMarcado->id_tipo_salida    = $request->get('idTipoSalida');
@@ -50,6 +50,7 @@ class MarcadoController extends Controller
      */
     public function show($id)
     {
+        $this->validarPermisos($this->modelMarcado->getTable(), 2);
         $data = $this->modelMarcado->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
@@ -65,6 +66,7 @@ class MarcadoController extends Controller
      */
     public function index()
     {
+        $this->validarPermisos($this->modelMarcado->getTable(), 2);
         $data = $this->modelMarcado->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -78,6 +80,7 @@ class MarcadoController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        $this->validarPermisos($this->modelMarcado->getTable(), 3);
         $response = null;
         $this->modelMarcado = $this->modelMarcado->find($id);
 
@@ -104,6 +107,7 @@ class MarcadoController extends Controller
      */
     public function destroy($id)
     {
+        $this->validarPermisos($this->modelMarcado->getTable(), 4);
         $response = null;
         $this->modelMarcado = $this->modelMarcado->find($id);
 

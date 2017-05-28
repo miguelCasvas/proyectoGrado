@@ -27,7 +27,7 @@ class EstadoController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
+        $this->validarPermisos($this->modelEstado->getTable(), 1);
         $this->modelEstado->nombre_estado    = $request->get('nombreEstado');
         $this->modelEstado->save();
 
@@ -47,6 +47,7 @@ class EstadoController extends Controller
      */
     public function show($id)
     {
+        $this->validarPermisos($this->modelEstado->getTable(), 2);
         $data = $this->modelEstado->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
@@ -62,6 +63,7 @@ class EstadoController extends Controller
      */
     public function index()
     {
+        $this->validarPermisos($this->modelEstado->getTable(), 2);
         $data = $this->modelEstado->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -75,6 +77,7 @@ class EstadoController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        $this->validarPermisos($this->modelEstado->getTable(), 3);
         $response = null;
         $this->modelEstado = $this->modelEstado->find($id);
 
@@ -99,6 +102,7 @@ class EstadoController extends Controller
      */
     public function destroy($id)
     {
+        $this->validarPermisos($this->modelEstado->getTable(), 4);
         $response = null;
         $this->modelEstado = $this->modelEstado->find($id);
 

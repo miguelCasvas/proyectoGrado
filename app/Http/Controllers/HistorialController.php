@@ -29,7 +29,7 @@ class HistorialController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
+        $this->validarPermisos($this->modelHistorial->getTable(), 1);
         $this->modelHistorial->accion    = $request->get('accion');
         // se debe traer de forma automática el usuario actual
         $this->modelHistorial->id_usuario    = Authorizer::getResourceOwnerId();
@@ -53,6 +53,7 @@ class HistorialController extends Controller
      */
     public function show($id)
     {
+        $this->validarPermisos($this->modelHistorial->getTable(), 2);
         $data = $this->modelHistorial->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
@@ -68,6 +69,7 @@ class HistorialController extends Controller
      */
     public function index()
     {
+        $this->validarPermisos($this->modelHistorial->getTable(), 2);
         $data = $this->modelHistorial->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -81,6 +83,7 @@ class HistorialController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        $this->validarPermisos($this->modelHistorial->getTable(), 3);
         $response = null;
         $this->modelHistorial = $this->modelHistorial->find($id);
 
@@ -108,6 +111,7 @@ class HistorialController extends Controller
      */
     public function destroy($id)
     {
+        $this->validarPermisos($this->modelHistorial->getTable(), 4);
         $response = null;
         $this->modelHistorial = $this->modelHistorial->find($id);
 

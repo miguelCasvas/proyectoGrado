@@ -29,6 +29,7 @@ class ConjuntoController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $this->validarPermisos($this->modelConjunto->getTable(), 1);
         $this->modelConjunto->nombre_conjunto     = $request->get('nombreConjunto');
         $this->modelConjunto->direccion     = $request->get('direccion');
         $this->modelConjunto->email     = $request->get('correo');
@@ -52,6 +53,7 @@ class ConjuntoController extends Controller
     public function show($id)
     {
         //
+        $this->validarPermisos($this->modelConjunto->getTable(), 2);
         $data = $this->modelConjunto->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
@@ -67,6 +69,7 @@ class ConjuntoController extends Controller
      */
     public function index()
     {
+        $this->validarPermisos($this->modelConjunto->getTable(), 2);
         $data = $this->modelConjunto->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -82,6 +85,7 @@ class ConjuntoController extends Controller
     public function update(StoreRequest $request, $id)
     {
         //
+        $this->validarPermisos($this->modelConjunto->getTable(), 3);
         $response = null;
         $this->modelConjunto = $this->modelConjunto->find($id);
 //
@@ -112,6 +116,7 @@ class ConjuntoController extends Controller
      */
     public function destroy($id)
     {
+        $this->validarPermisos($this->modelConjunto->getTable(), 4);
         $response = null;
         $this->modelConjunto = $this->modelConjunto->find($id);
 

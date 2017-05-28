@@ -31,6 +31,7 @@ class CatalogoController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        $this->validarPermisos($this->modelCatalogo->getTable(), 1);
         $this->modelCatalogo->nombre_Catalogo = $request->get('nombreCatalogo');
         $this->modelCatalogo->id_conjunto = $request->get('idConjunto');
         $this->modelCatalogo->save();
@@ -48,6 +49,7 @@ class CatalogoController extends Controller
      */
     public function show($id)
     {
+        $this->validarPermisos($this->modelCatalogo->getTable(), 2);
         $data = $this->modelCatalogo->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
@@ -62,6 +64,7 @@ class CatalogoController extends Controller
      */
     public function index()
     {
+        $this->validarPermisos($this->modelCatalogo->getTable(), 2);
         $data = $this->modelCatalogo->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -75,6 +78,7 @@ class CatalogoController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        $this->validarPermisos($this->modelCatalogo->getTable(), 3);
         $response = null;
         $this->modelCatalogo = $this->modelCatalogo->find($id);
 
@@ -100,6 +104,7 @@ class CatalogoController extends Controller
      */
     public function destroy($id)
     {
+        $this->validarPermisos($this->modelCatalogo->getTable(), 4);
         $response = null;
         $this->modelCatalogo = $this->modelCatalogo->find($id);
 
@@ -113,18 +118,5 @@ class CatalogoController extends Controller
         return $response;
     }
 
-    /**
-     * Validar que el registro exista en el modelo Conjunto
-     *
-     * @return bool | \App\Models\Conjunto
-     */
-    private function busquedaConjunto()
-    {
-        # Validar que exista conjunto por su id
-        #if($this->conjuntoController->busquedaPorIdentificador($request->get('idConjunto')) == null){
-        #    $numError = 400;
-        #    $response = response()->json([ 'status'=>  $numError, 'message'=> trans('errors.'.$numError ) ], $numError);
-        #}
 
-    }
 }

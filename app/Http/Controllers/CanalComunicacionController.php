@@ -32,6 +32,8 @@ class CanalComunicacionController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelCanalComunicacion->getTable(), 1);
         $response = null;
 
         $this->modelCanalComunicacion->indicativo    = $request->get('indicativo');
@@ -58,6 +60,7 @@ class CanalComunicacionController extends Controller
      */
     public function show($id)
     {
+        $this->validarPermisos($this->modelCanalComunicacion->getTable(), 2);
         $data = $this->modelCanalComunicacion->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
@@ -73,6 +76,7 @@ class CanalComunicacionController extends Controller
      */
     public function index()
     {
+        $this->validarPermisos($this->modelCanalComunicacion->getTable(), 2);
         $data = $this->modelCanalComunicacion->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -86,6 +90,7 @@ class CanalComunicacionController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        $this->validarPermisos($this->modelCanalComunicacion->getTable(), 3);
         $this->modelCanalComunicacion = $this->modelCanalComunicacion->find($id);
 //
         if ($this->modelCanalComunicacion == null ){
@@ -111,6 +116,7 @@ class CanalComunicacionController extends Controller
      */
     public function destroy($id)
     {
+        $this->validarPermisos($this->modelCanalComunicacion->getTable(), 4);
         $this->modelCanalComunicacion = $this->modelCanalComunicacion->find($id);
 
         if ($this->modelCanalComunicacion == null){

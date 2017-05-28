@@ -28,7 +28,7 @@ class CiudadController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
+        $this->validarPermisos($this->modelCiudad->getTable(), 1);
         $this->modelCiudad->nombre_ciudad    = $request->get('nombreCiudad');
         $this->modelCiudad->save();
 
@@ -48,6 +48,7 @@ class CiudadController extends Controller
      */
     public function show($id)
     {
+        $this->validarPermisos($this->modelCiudad->getTable(), 2);
         $data = $this->modelCiudad->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
@@ -63,6 +64,7 @@ class CiudadController extends Controller
      */
     public function index()
     {
+        $this->validarPermisos($this->modelCiudad->getTable(), 2);
         $data = $this->modelCiudad->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -76,6 +78,7 @@ class CiudadController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        $this->validarPermisos($this->modelCiudad->getTable(), 3);
         $response = null;
         $this->modelCiudad = $this->modelCiudad->find($id);
 
@@ -100,6 +103,7 @@ class CiudadController extends Controller
      */
     public function destroy($id)
     {
+        $this->validarPermisos($this->modelCiudad->getTable(), 4);
         $response = null;
         $this->modelCiudad = $this->modelCiudad->find($id);
 

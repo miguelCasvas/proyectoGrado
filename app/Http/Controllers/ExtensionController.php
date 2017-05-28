@@ -27,7 +27,7 @@ class ExtensionController extends Controller
      */
     public function store(StoreRequest $request)
     {
-
+        $this->validarPermisos($this->modelExtension->getTable(), 1);
         $this->modelExtension->extension    = $request->get('extension');
         $this->modelExtension->id_conjunto    = $request->get('idConjunto');
         $this->modelExtension->id_estado    = $request->get('idEstado');
@@ -49,6 +49,7 @@ class ExtensionController extends Controller
      */
     public function show($id)
     {
+        $this->validarPermisos($this->modelExtension->getTable(), 2);
         $data = $this->modelExtension->find($id);
         $response = response()->json([ 'data'=> $data ]);
         # Creacion en modelo log
@@ -64,6 +65,7 @@ class ExtensionController extends Controller
      */
     public function index()
     {
+        $this->validarPermisos($this->modelExtension->getTable(), 2);
         $data = $this->modelExtension->all();
         return response()->json([ "data"=> $data ]);
     }
@@ -77,6 +79,7 @@ class ExtensionController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        $this->validarPermisos($this->modelExtension->getTable(), 3);
         $response = null;
         $this->modelExtension = $this->modelExtension->find($id);
 
@@ -103,6 +106,7 @@ class ExtensionController extends Controller
      */
     public function destroy($id)
     {
+        $this->validarPermisos($this->modelExtension->getTable(), 4);
         $response = null;
         $this->modelExtension = $this->modelExtension->find($id);
 
