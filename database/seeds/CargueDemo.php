@@ -106,25 +106,25 @@ class CargueDemo extends Seeder
         #                    #SUPERADMINITRADOR
         \DB::table('modelos')->insert(['nombre_modelo' => 'canal_comunicaciones']);
         \DB::table('modelos')->insert(['nombre_modelo' => 'catalogos']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'ciudades']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'conjuntos']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'estados']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'modelos']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'modulos']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'permisos']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'permisos_por_rol']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'roles']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'tipo_saldas']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'ubicacion_catalogos']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'logs']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'ciudades']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'conjuntos']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'estados']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'modelos']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'modulos']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'permisos']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'permisos_por_rol']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'roles']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'tipo_saldas']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'ubicacion_catalogos']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'logs']);
                             #ADMINISTRADOR
-        \DB::table('modulos')->insert(['nombre_modulo' => 'usuario_extensiones']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'extensiones']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'usuario_extensiones']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'extensiones']);
                             #USURIO
-        \DB::table('modulos')->insert(['nombre_modulo' => 'usuarios']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'marcados']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'historiales']);
-        \DB::table('modulos')->insert(['nombre_modulo' => 'notificaciones']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'usuarios']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'marcados']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'historiales']);
+        \DB::table('modelos')->insert(['nombre_modelo' => 'notificaciones']);
 
 
 
