@@ -26,7 +26,7 @@ class UsuarioExtensionController extends Controller
     public function index()
     {
         # Validar permisos
-        $this->validarPermisos($this->modelUsuarioExtensiones->getTable(),'Lectura');
+        $this->validarPermisos($this->modelUsuarioExtensiones->getTable(), 1);
 
         $data = $this->modelUsuarioExtensiones->all();
         return response()->json([ "data"=> $data ]);
@@ -38,6 +38,9 @@ class UsuarioExtensionController extends Controller
      */
     public function show($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuarioExtensiones->getTable(), 2);
+
         $data = ['data' => $this->modelUsuarioExtensiones->find($id)];
         return response()->json($data);
 
@@ -71,6 +74,9 @@ class UsuarioExtensionController extends Controller
      */
     public function update(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuarioExtensiones->getTable(), 3);
+
         $this->modelUsuarioExtensiones = $this->modelUsuarioExtensiones->find($id);
 
         if ($this->modelUsuarioExtensiones == null){
@@ -96,6 +102,9 @@ class UsuarioExtensionController extends Controller
      */
     public function destroy($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuarioExtensiones->getTable(), 4);
+
         $this->modelUsuarioExtensiones = $this->modelUsuarioExtensiones->find($id);
 
         if ($this->modelUsuarioExtensiones == null){

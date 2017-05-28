@@ -20,6 +20,9 @@ class ModeloController extends Controller
 
     public function index()
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelModelo->getTable(), 2);
+
         $response = response()->json(['data' => $this->modelModelo->all()]);
         $this->CreateRegisterLog($response);
         return $response;
@@ -31,6 +34,9 @@ class ModeloController extends Controller
      */
     public function show($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelModelo->getTable(), 2);
+
         $response = response()->json(['data' => $this->modelModelo->find($id)]);
         $this->CreateRegisterLog($response);
 
@@ -43,6 +49,9 @@ class ModeloController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelModelo->getTable(), 1);
+
         $this->modelModelo->nombre_modelo = $request->get('nombreModelo');
         $this->modelModelo->save();
 
@@ -59,6 +68,9 @@ class ModeloController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelModelo->getTable(), 3);
+
         $this->modelModelo = $this->modelModelo->find($id);
 
         if ($this->modelModelo == null)
@@ -73,6 +85,9 @@ class ModeloController extends Controller
      */
     public function destroy($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelModelo->getTable(), 4);
+
         $this->modelModelo = $this->modelModelo->find($id);
 
         if ($this->modelModelo == null)

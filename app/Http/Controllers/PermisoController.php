@@ -23,6 +23,9 @@ class PermisoController extends Controller
      */
     public function store(StoreRequest $request)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelPermiso->getTable(), 1);
+
         $this->modelPermiso->nombre_permiso = $request->get('nombrePermiso');
         $this->modelPermiso->id_estado = $request->get('idEstado');
         $this->modelPermiso->id_roles = '.';
@@ -39,6 +42,9 @@ class PermisoController extends Controller
      */
     public function update(StoreRequest $request, $id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelPermiso->getTable(), 3);
+
         $this->modelPermiso = $this->modelPermiso->find($id);
 
         if ($this->modelPermiso == null)
@@ -58,6 +64,9 @@ class PermisoController extends Controller
      */
     public function index()
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelPermiso->getTable(), 2);
+
         $data = $this->modelPermiso->all();
         $response = response()->json([ 'data' => $data ]);
 
@@ -73,6 +82,9 @@ class PermisoController extends Controller
      */
     public function show($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelPermiso->getTable(), 2);
+
         $data = $this->modelPermiso->find($id);
         $response = response()->json([ 'data' => $data ]);
 
@@ -87,6 +99,9 @@ class PermisoController extends Controller
      */
     public function destroy($id)
     {
+        # Validar permisos
+        $this->validarPermisos($this->modelPermiso->getTable(), 4);
+
         $this->modelPermiso = $this->modelPermiso->find($id);
 
         if ($this->modelPermiso == null)
