@@ -17,7 +17,6 @@ class StoreRequest extends FormRequestToAPI
     {
         return [
             'nombreEstado'=>['required'],
-            'idModulo'=>['required','numeric','exists:ciudades,id_ciudad']
         ];
     }
 }

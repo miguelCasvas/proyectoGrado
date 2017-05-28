@@ -29,7 +29,6 @@ class EstadoController extends Controller
     {
 
         $this->modelEstado->nombre_estado    = $request->get('nombreEstado');
-        $this->modelEstado->id_modulo    = $request->get('idModulo');
         $this->modelEstado->save();
 
         $response = response()->json(['data'=>$this->modelEstado]);
@@ -84,7 +83,6 @@ class EstadoController extends Controller
         }
         else{
             $this->modelEstado->nombre_estado    = $request->get('nombreEstado');
-            $this->modelEstado->id_modulo    = $request->get('idModulo');
             $this->modelEstado->save();
             $response = response()->json(['data'=>$this->modelEstado]);
         }

@@ -16,8 +16,6 @@ class CreateTableEstado extends Migration
             $table->increments('id_estado');
             $table->string('nombre_estado', 200);
             $table->timestamps();
-            # FK
-            $table->integer('id_modulo')->unsigned();
         });
     }
 

@@ -134,7 +134,7 @@ class CargueDemo extends Seeder
             'nombre_estado' => 'activo'
         ]);
         \DB::table('estados')->insert([
-            'nombre_estado' => 'inactivo'
+            'nombre_estado' => 'inactivo',
         ]);
 
         # CARGUE EXTENSIONES
