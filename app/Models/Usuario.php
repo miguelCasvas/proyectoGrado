@@ -22,4 +22,25 @@ class Usuario extends Model
         return $this->hasMany(\App\Models\CanalComunicacion::class, 'id_usuario', 'id_usuario');
     }
 
+    public function getFiltrado($idRol,$id=null)
+    {
+        $dataR = [];
+
+        if ($idRol == 1){
+            if ($id != null)
+                $dataR = Usuario::all();
+            else
+                $dataR = Usuario::find($id);
+        }
+        else{
+            $condiciones[0] = ['id_rol','!=',1];
+
+            if ($id != null)
+                $condiciones[1] = ['id_usuario','=',$id];
+
+            $dataR = Usuario::where($condiciones);
+        }
+
+        return $dataR;
+    }
 }

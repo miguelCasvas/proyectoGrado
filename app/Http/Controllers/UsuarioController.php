@@ -67,13 +67,36 @@ class usuarioController extends Controller
      * @param $id
      * @return \Illuminate\Http\Response
      */
+    public function index()
+    {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuario->getTable(), 2);
+
+        $busqueda = $this->modelUsuario->getFiltrado($this->miUsuario->get('id_rol'))->get();
+        $data = ['data' => $busqueda];
+        $response = response()->json($data);
+
+        $this->CreateRegisterLog($response);
+        return $response;
+    }
+
+    /**
+     * Busqueda de usuario por id
+     *
+     * @param $id
+     * @return \Illuminate\Http\Response
+     */
     public function show($id)
     {
         # Validar permisos
         $this->validarPermisos($this->modelUsuario->getTable(), 2);
 
-        $data = ['data' => $this->modelUsuario->find($id)];
-        return response()->json($data);
+        $busqueda = $this->modelUsuario->getFiltrado($this->miUsuario->get('id_rol'), $id)->get();
+        $data = ['data' => $busqueda];
+        $response = response()->json($data);
+
+        $this->CreateRegisterLog($response);
+        return $response;
     }
 
     /**
@@ -86,10 +109,21 @@ class usuarioController extends Controller
     public function update(UpdateRequest $request, $id)
     {
         # Validar permisos
+        $response = null;
         $this->validarPermisos($this->modelUsuario->getTable(), 3);
 
-        $response = null;
-        $this->modelUsuario = $this->modelUsuario->find($id);
+        $idRol = $this->miUsuario->get('id_rol');
+
+        if ($idRol == 1){
+            $this->modelUsuario = $this->modelUsuario->find($id);
+        }
+        else{
+            $this->modelUsuario = $this->modelUsuario->find($id);
+            $idRolUsuarioEditar = $this->modelUsuario->id_rol;
+
+            if ($idRolUsuarioEditar == 1)
+                abort(400, trans('errors.902'));
+        }
 
         if ($this->modelUsuario == null)
             abort(400, trans('errors.901'));
@@ -132,5 +166,7 @@ class usuarioController extends Controller
         $this->CreateRegisterLog($response);
         return $response;
     }
+
+
 
 }

@@ -16,7 +16,7 @@ class StoreRequest extends FormRequestToAPI
     public function rules()
     {
         return [
-            'fechaNacimiento' => ['required', 'date_format:yyyy-mm-dd'],
+            'fechaNacimiento' => ['required', 'date_format:Y-m-d'],
             'identificacion' => ['required', 'min:7'],
             'nombres' => ['required'],
             'apellidos' => ['required'],

@@ -124,6 +124,8 @@ class User extends Authenticatable
         $miUsuario->put('email', $miUsuarioQuery->first()->email);
         $miUsuario->put('identificacion', $miUsuarioQuery->first()->identificacion);
         $miUsuario->put('fecha_nacimiento', $miUsuarioQuery->first()->fecha_nacimiento);
+        $miUsuario->put('id_rol', $miUsuarioQuery->first()->id_rol);
+
         # Extensiones
         $miUsuario->put('extensiones', new Collection());
         # Conjunto
