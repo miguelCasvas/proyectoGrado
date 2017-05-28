@@ -35,11 +35,11 @@ class CargueDemo extends Seeder
         ]);
 
         # CARGUE UBICACION CATALOGO
-        for($i = 1; $i == 8; $i++){
+        for($i = 1; $i <= 8; $i++){
             \DB::table('ubicacion_catalogos')->insert(['nombre_ubicacion_catalogo' => $i,'id_catalogo' => 1 ]);
         }
 
-        for($i = 1; $i == 6; $i++){
+        for($i = 1; $i <= 6; $i++){
             \DB::table('ubicacion_catalogos')->insert(['nombre_ubicacion_catalogo' => $i.'01' ,'id_catalogo' => 2 ]);
             \DB::table('ubicacion_catalogos')->insert(['nombre_ubicacion_catalogo' => $i.'02' ,'id_catalogo' => 2 ]);
             \DB::table('ubicacion_catalogos')->insert(['nombre_ubicacion_catalogo' => $i.'03' ,'id_catalogo' => 2 ]);
@@ -181,21 +181,21 @@ class CargueDemo extends Seeder
         ]);
 
         # CARGUE PERMISOS_POR_ROL SUPERADMINISTRADOR
-        for($i = 1; $i == 19; $i++){
+        for($i = 1; $i <= 19; $i++){
             \DB::table('permisos_por_rol')->insert(['id_rol' => 1,'id_permiso' => 1,'id_modelo' => $i]);
             \DB::table('permisos_por_rol')->insert(['id_rol' => 1,'id_permiso' => 2,'id_modelo' => $i]);
             \DB::table('permisos_por_rol')->insert(['id_rol' => 1,'id_permiso' => 3,'id_modelo' => $i]);
             \DB::table('permisos_por_rol')->insert(['id_rol' => 1,'id_permiso' => 4,'id_modelo' => $i]);
         }
         # CARGUE PERMISOS_POR_ROL ADMINISTRADOR
-        for($i = 14; $i == 19; $i++){
+        for($i = 14; $i <= 19; $i++){
             \DB::table('permisos_por_rol')->insert(['id_rol' => 2,'id_permiso' => 1,'id_modelo' => $i]);
             \DB::table('permisos_por_rol')->insert(['id_rol' => 2,'id_permiso' => 2,'id_modelo' => $i]);
             \DB::table('permisos_por_rol')->insert(['id_rol' => 2,'id_permiso' => 3,'id_modelo' => $i]);
             \DB::table('permisos_por_rol')->insert(['id_rol' => 2,'id_permiso' => 4,'id_modelo' => $i]);
         }
         # CARGUE PERMISOS_POR_ROLUSUARIO
-        for($i = 16; $i == 19; $i++){
+        for($i = 16; $i <= 19; $i++){
             \DB::table('permisos_por_rol')->insert(['id_rol' => 3,'id_permiso' => 1,'id_modelo' => $i]);
             \DB::table('permisos_por_rol')->insert(['id_rol' => 3,'id_permiso' => 2,'id_modelo' => $i]);
             \DB::table('permisos_por_rol')->insert(['id_rol' => 3,'id_permiso' => 3,'id_modelo' => $i]);
