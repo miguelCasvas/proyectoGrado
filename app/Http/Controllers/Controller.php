@@ -29,16 +29,16 @@ class Controller extends BaseController
         return $this;
     }
 
-    protected function validarPermisos($modelo = null, $permiso = null)
+    protected function validarPermisos($modelo, $idPermiso)
     {
         # Cargue de informacion del usuario
         $this->setMiUsuario();
         $acceso = false;
 
         # Consulta de permisos del usuario sobre la accion
-        $this->miUsuario->get('permisos')->each(function($arrPermiso) use($modelo, $permiso, &$acceso){
+        $this->miUsuario->get('permisos')->each(function($arrPermiso) use($modelo, $idPermiso, &$acceso){
 
-            if ($arrPermiso['nombre_permiso'] == $permiso &&
+            if ($arrPermiso['id_permiso'] == $idPermiso &&
                 $arrPermiso['nombre_modelo'] == $modelo){
                 $acceso = true;
             }

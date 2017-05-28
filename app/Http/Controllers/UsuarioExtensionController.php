@@ -51,7 +51,7 @@ class UsuarioExtensionController extends Controller
     public function store(StoreRequest $request)
     {
         # Validar permisos
-        $this->validarPermisos($this->modelUsuarioExtensiones->getTable(),'Creacion');
+        $this->validarPermisos($this->modelUsuarioExtensiones->getTable(), 1);
 
         $this->modelUsuarioExtensiones->id_extension = $request->get('idExtension');
         $this->modelUsuarioExtensiones->id_usuario = $request->get('idUsuario');
