@@ -16,6 +16,8 @@ Route::group(['prefix'=>'','before' => 'permisosUsuario'], function()
 
     # USUARIO
     Route::resource('usuarios', 'usuarioController');
+    Route::get('miusuario/{idUser}','usuarioController@getMiUsuario');
+    Route::put('edicionmiusuario/{idUser}','usuarioController@edicionMiUsuario');
 
     # EXTENSION DE USUARIO
     Route::resource('usuarioextension', 'UsuarioExtensionController');
@@ -74,6 +76,7 @@ Route::group(['prefix'=>'','before' => 'permisosUsuario'], function()
 
     //MARCADO
     Route::resource('marcado','MarcadoController');
+    Route::get('mismarcados','MarcadoController@getMisMarcados');
 
     // PERMISO POR ROL
     Route::resource('permisorol','PermisosRolController');

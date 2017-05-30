@@ -167,6 +167,27 @@ class usuarioController extends Controller
         return $response;
     }
 
+    public function getMiUsuario($id)
+    {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuario->getTable(), 2);
 
+        if ($id != Authorizer::getResourceOwnerId())
+            abort(400, trans('errors.902'));
 
+        $response = \response()->json(['data' => $this->miUsuario]);
+
+        return $response;
+    }
+
+    public function edicionMiUsuario(UpdateRequest $request, $id)
+    {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuario->getTable(), 3);
+
+        if ($id != Authorizer::getResourceOwnerId())
+            abort(400, trans('errors.902'));
+
+        return $this->update($request, $id);
+    }
 }
