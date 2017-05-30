@@ -9,7 +9,7 @@
 //    return Response::json($user);
 //}]);
 
-Route::group(['prefix'=>'','before' => 'permisosUsuario'], function()
+Route::group(['prefix'=>'','before' => ''], function()
 {
     //Route::post('usuarios', 'usuarioController@store');
     //Route::get('demo', 'usuarioController@demo');
@@ -64,6 +64,7 @@ Route::group(['prefix'=>'','before' => 'permisosUsuario'], function()
 
     // HISTORIAL
     Route::resource('historial', 'HistorialController');
+    Route::get('mihistorial/{idUser}','HistorialController@getMiHistorial');
 
     // MODULO
     Route::resource('modulo', 'ModuloController');
@@ -76,7 +77,7 @@ Route::group(['prefix'=>'','before' => 'permisosUsuario'], function()
 
     //MARCADO
     Route::resource('marcado','MarcadoController');
-    Route::get('mismarcados','MarcadoController@getMisMarcados');
+    //Route::get('mismarcados','MarcadoController@getMisMarcados');
 
     // PERMISO POR ROL
     Route::resource('permisorol','PermisosRolController');

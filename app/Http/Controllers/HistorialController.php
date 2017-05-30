@@ -44,7 +44,6 @@ class HistorialController extends Controller
         return $response;
     }
 
-
     /**
      * Display the specified resource.
      *
@@ -123,5 +122,19 @@ class HistorialController extends Controller
         }
         $this->CreateRegisterLog($response);
         return $response;
+    }
+
+    public function getMiHistorial($id)
+    {
+        $idUser = Authorizer::getResourceOwnerId();
+        if ($id != $idUser)
+            abort(400, trans('errors.902'));
+
+        $response = response()->json(['data' => $this->modelHistorial->where('id_usuario','=',$idUser)->get()]);
+        # Creacion en modelo log
+        //$this->CreateRegisterLog($response);
+
+        return $response;
+
     }
 }
