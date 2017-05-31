@@ -14,7 +14,6 @@ class UserController extends Controller
 
     private $modelUser = User::class;
 
-
     function __construct()
     {
         $this->modelUser = new User();
@@ -78,6 +77,16 @@ class UserController extends Controller
         return $response;
     }
 
+    /**
+     * @param $filtros
+     *
+     * @return mixed
+     */
+    public function busquedaRegistro($filtros)
+    {
+        return $this->modelUser->where($filtros);
+    }
+    
     /**
      * @param $contrasenia
      * @param $confirmarContrasenia

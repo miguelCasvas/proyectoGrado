@@ -27,7 +27,7 @@ class Usuario extends Model
         $dataR = [];
 
         if ($idRol == 1){
-            if ($id != null)
+            if ($id == null)
                 $dataR = Usuario::all();
             else
                 $dataR = Usuario::find($id);

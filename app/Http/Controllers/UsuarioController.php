@@ -43,7 +43,13 @@ class usuarioController extends Controller
         $this->validarPermisos($this->modelUsuario->getTable(), 1);
 
         # Validar que el registro no se encuentre en el sistema
+        $busquedaRegistroUser =
+            $this->userController->busquedaRegistro([
+                ['email','=', $request->get('correo')]
+            ])->first();
 
+        if ($busquedaRegistroUser != null)
+            abort(400,trans('errors.903'));
 
         $this->modelUsuario->nombres            = $request->get('nombres');
         $this->modelUsuario->apellidos          = $request->get('apellidos');
@@ -75,7 +81,7 @@ class usuarioController extends Controller
         # Validar permisos
         $this->validarPermisos($this->modelUsuario->getTable(), 2);
 
-        $busqueda = $this->modelUsuario->getFiltrado($this->miUsuario->get('id_rol'))->get();
+        $busqueda = $this->modelUsuario->getFiltrado($this->miUsuario->get('id_rol'))->all();
         $data = ['data' => $busqueda];
         $response = response()->json($data);
 
@@ -169,13 +175,10 @@ class usuarioController extends Controller
         return $response;
     }
 
-    public function getMiUsuario($id)
+    public function getMiUsuario()
     {
         # Validar permisos
         $this->validarPermisos($this->modelUsuario->getTable(), 2);
-
-        if ($id != Authorizer::getResourceOwnerId())
-            abort(400, trans('errors.902'));
 
         $response = \response()->json(['data' => $this->miUsuario]);
 
