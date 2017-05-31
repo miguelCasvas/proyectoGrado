@@ -30,7 +30,7 @@ class PermisosRolController extends Controller
 
         $data = $this->modelPermisoRol->all();
         $response = response()->json(['data' => $data]);
-        $this->CreateRegisterLog($response);
+        //$this->CreateRegisterLog($response);
         return $response;
     }
 

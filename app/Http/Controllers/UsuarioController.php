@@ -99,8 +99,14 @@ class usuarioController extends Controller
     {
         # Validar permisos
         $this->validarPermisos($this->modelUsuario->getTable(), 2);
-        $busqueda = $this->modelUsuario->getFiltrado($this->miUsuario->get('id_rol'), $id)->first();
-        $data = ['data' => $busqueda];
+        $busqueda = $this->modelUsuario->getFiltrado($this->miUsuario->get('id_rol'), $id);
+
+        if ($busqueda == null)
+            $data = ['data' => ''];
+        else
+            $data = ['data' => $busqueda->first()];
+
+
         $response = response()->json($data);
 
         $this->CreateRegisterLog($response);
@@ -178,8 +184,8 @@ class usuarioController extends Controller
     public function getMiUsuario()
     {
         # Validar permisos
-        $this->validarPermisos($this->modelUsuario->getTable(), 2);
-
+        //$this->validarPermisos($this->modelUsuario->getTable(), 2);
+        $this->setMiUsuario();
         $response = \response()->json(['data' => $this->miUsuario]);
 
         return $response;

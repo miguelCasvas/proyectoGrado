@@ -17,7 +17,7 @@ class StoreRequest extends FormRequestToAPI
         return [
             'indicativo' => ['required'],
             'canal' => ['required'],
-            'idConjunto' => ['required', 'numeric','exists:modulos,id_modulo']
+            'idConjunto' => ['required', 'numeric','exists:conjuntos,id_conjunto']
         ];
     }
 }
