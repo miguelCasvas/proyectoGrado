@@ -42,6 +42,9 @@ class usuarioController extends Controller
         # Validar permisos
         $this->validarPermisos($this->modelUsuario->getTable(), 1);
 
+        # Validar que el registro no se encuentre en el sistema
+
+
         $this->modelUsuario->nombres            = $request->get('nombres');
         $this->modelUsuario->apellidos          = $request->get('apellidos');
         $this->modelUsuario->identificacion     = $request->get('identificacion');
@@ -90,8 +93,7 @@ class usuarioController extends Controller
     {
         # Validar permisos
         $this->validarPermisos($this->modelUsuario->getTable(), 2);
-
-        $busqueda = $this->modelUsuario->getFiltrado($this->miUsuario->get('id_rol'), $id)->get();
+        $busqueda = $this->modelUsuario->getFiltrado($this->miUsuario->get('id_rol'), $id)->first();
         $data = ['data' => $busqueda];
         $response = response()->json($data);
 

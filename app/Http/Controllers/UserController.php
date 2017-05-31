@@ -20,7 +20,6 @@ class UserController extends Controller
         $this->modelUser = new User();
     }
 
-
     public function store(Request $request, $idUsuario = null)
     {
 
@@ -79,6 +78,11 @@ class UserController extends Controller
         return $response;
     }
 
+    /**
+     * @param $contrasenia
+     * @param $confirmarContrasenia
+     * @return bool
+     */
     public function validarContrasenia ($contrasenia, $confirmarContrasenia){
         return ($contrasenia != $confirmarContrasenia);
     }
