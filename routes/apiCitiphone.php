@@ -78,4 +78,13 @@ Route::group(['prefix'=>'','before' => 'permisosUsuario'], function()
     // PERMISO POR ROL
     Route::resource('permisorol','PermisosRolController');
 
+    // MI USUARIO
+    Route::get('miusuario','UsuarioController@miUsuario');
+
+    // ACTUALIZAR MI USUARIO
+    Route::put('actualizarmiusuario','UsuarioController@actualizarMiUsuario');
+
+    // MI HOSTORIAL
+    Route::get('mihistorial','HistorialController@miHistoiral');
+
 });

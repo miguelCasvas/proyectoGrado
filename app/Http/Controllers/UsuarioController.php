@@ -167,6 +167,63 @@ class usuarioController extends Controller
         return $response;
     }
 
+    /**
+     * Busqueda de usuario por id
+     *
+     * @param
+     * @return \Illuminate\Http\Response
+     */
+    public function miUsuario()
+    {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuario->getTable(), 5);
+        $response = $this->miUsuario;
+        unset($response['permisos']);
 
+        $this->CreateRegisterLog($response);
+        return $response;
+    }
 
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function actualizarMiUsuario(UpdateRequest $request)
+    {
+        # Validar permisos
+        $this->validarPermisos($this->modelUsuario->getTable(), 6);
+        $response = null;
+
+        $id = $this->miUsuario->get('id_usuario');
+
+        $idRol = $this->miUsuario->get('id_rol');
+
+        if ($idRol == 1){
+            $this->modelUsuario = $this->modelUsuario->find($id);
+        }
+        else{
+            $this->modelUsuario = $this->modelUsuario->find($id);
+            $idRolUsuarioEditar = $this->modelUsuario->id_rol;
+
+            if ($idRolUsuarioEditar == 1)
+                abort(400, trans('errors.902'));
+        }
+
+        if ($this->modelUsuario == null)
+            abort(400, trans('errors.901'));
+
+        $this->modelUsuario->nombres            = $request->get('nombres');
+        $this->modelUsuario->apellidos          = $request->get('apellidos');
+        $this->modelUsuario->email              = $request->get('correo');
+        $this->modelUsuario->identificacion     = $request->get('identificacion');
+        $this->modelUsuario->fecha_nacimiento   = $request->get('fechaNacimiento');
+        $this->modelUsuario->save();
+
+        $response = response()->json($this->modelUsuario);
+        $this->CreateRegisterLog($response);
+
+        return $response;
+    }
 }

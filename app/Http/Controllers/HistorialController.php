@@ -124,4 +124,24 @@ class HistorialController extends Controller
         $this->CreateRegisterLog($response);
         return $response;
     }
+
+    /**
+     * Busqueda de usuario por id
+     *
+     * @param
+     * @return \Illuminate\Http\Response
+     */
+    public function miHistoiral()
+    {
+        # Validar permisos
+        $this->validarPermisos($this->modelHistorial->getTable(), 5);
+        $id = $this->miUsuario->get('id_usuario');
+
+        $data = $this->modelHistorial->where('id_usuario','=',$id);
+        $response = response()->json([ 'data'=> $data ]);
+        # Creacion en modelo log
+
+        $this->CreateRegisterLog($response);
+        return $response;
+    }
 }
